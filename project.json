@@ -1,0 +1,31 @@
+{
+  "project": {
+    "name": "UK Commission Admin Panel",
+    "version": "2.2.0",
+    "description": "Enterprise-Grade Commission Management System",
+    "repository": "https://github.com/Skypromd/uk-commission-admin-panel",
+    "author": {
+      "name": "Ianioglo Vladimir",
+      "email": "skypromd@gmail.com"
+    },
+    "technologies": [
+      "React",
+      "TypeScript",
+      "Python",
+      "FastAPI",
+      "SQLite",
+      "TailwindCSS",
+      "Vite"
+    ],
+    "features": [
+      "Client Management",
+      "Commission Tracking",
+      "Analytics Dashboard",
+      "Multi-language Support",
+      "Professional Theme",
+      "Export/Import Functionality"
+    ],
+    "status": "Production Ready",
+    "license": "MIT"
+  }
+}

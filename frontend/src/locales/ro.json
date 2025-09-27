@@ -1,0 +1,49 @@
+{
+  "common": {
+    "loading": "Se încarcă...",
+    "save": "Salvează",
+    "cancel": "Anulează",
+    "delete": "Șterge",
+    "edit": "Editează",
+    "add": "Adaugă",
+    "search": "Caută",
+    "filter": "Filtrează",
+    "export": "Exportă",
+    "import": "Importă",
+    "yes": "Da",
+    "no": "Nu",
+    "ok": "OK",
+    "close": "Închide",
+    "back": "Înapoi",
+    "next": "Următorul",
+    "previous": "Anterior",
+    "submit": "Trimite",
+    "reset": "Resetează"
+  },
+  "navigation": {
+    "dashboard": "Panou de control",
+    "clients": "Clienți",
+    "commissions": "Comisioane",
+    "reports": "Rapoarte",
+    "settings": "Setări"
+  },
+  "dashboard": {
+    "title": "Panou de control",
+    "overview": "Prezentare generală",
+    "statistics": "Statistici",
+    "recentActivity": "Activitate recentă"
+  },
+  "clients": {
+    "title": "Clienți",
+    "addClient": "Adaugă client",
+    "editClient": "Editează client",
+    "deleteClient": "Șterge client",
+    "clientDetails": "Detalii client"
+  },
+  "commissions": {
+    "title": "Comisioane",
+    "totalCommissions": "Total comisioane",
+    "pendingCommissions": "Comisioane în așteptare",
+    "paidCommissions": "Comisioane plătite"
+  }
+}

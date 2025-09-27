@@ -1,0 +1,112 @@
+name: 🐛 Bug Report
+description: Сообщить об ошибке в системе
+title: "[BUG]: "
+labels: ["bug", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо за сообщение об ошибке! Пожалуйста, заполните всю информацию ниже.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Описание проблемы
+      description: Четкое и краткое описание проблемы
+      placeholder: Расскажите, что пошло не так...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Шаги воспроизведения
+      description: Шаги для воспроизведения проблемы
+      placeholder: |
+        1. Перейти на '...'
+        2. Нажать на '...'
+        3. Прокрутить до '...'
+        4. Увидеть ошибку
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Ожидаемое поведение
+      description: Что должно было произойти?
+      placeholder: Опишите ожидаемый результат...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Фактическое поведение
+      description: Что произошло на самом деле?
+      placeholder: Опишите, что произошло вместо ожидаемого...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Критичность
+      description: Насколько критична эта ошибка?
+      options:
+        - Critical - Система не работает
+        - High - Основная функциональность затронута
+        - Medium - Некоторые функции затронуты
+        - Low - Незначительные проблемы
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Компонент
+      description: Какая часть системы затронута?
+      options:
+        - Backend API
+        - Frontend UI
+        - Database
+        - Authentication
+        - WebSocket
+        - Dashboard
+        - Commission Management
+        - User Management
+        - Reports
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Окружение
+      description: Информация об окружении
+      placeholder: |
+        - OS: [например, Windows 11]
+        - Browser: [например, Chrome 120]
+        - Version: [например, v2.1.0]
+        - Environment: [например, Production]
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Логи и скриншоты
+      description: Добавьте логи, скриншоты или другую полезную информацию
+      placeholder: Вставьте логи ошибок или приложите скриншоты...
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Чеклист
+      options:
+        - label: Я проверил, что подобной Issue еще нет
+          required: true
+        - label: Я предоставил всю необходимую информацию
+          required: true

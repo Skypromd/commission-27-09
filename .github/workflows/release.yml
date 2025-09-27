@@ -1,0 +1,45 @@
+name: Release Management
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Generate changelog
+      id: changelog
+      run: |
+        # Generate changelog from git commits
+        echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+        git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: UK Commission Admin Panel ${{ github.ref }}
+        body: |
+          ## 🎉 New Release
+
+          ### Changes in this release:
+          ${{ steps.changelog.outputs.CHANGELOG }}
+
+          ### 📊 Assets
+          - Docker images: `skypromd/uk-commission-backend:${{ github.ref_name }}`, `skypromd/uk-commission-frontend:${{ github.ref_name }}`
+
+          ### 🚀 Deployment
+          This release has been automatically deployed to production.
+        draft: false
+        prerelease: false

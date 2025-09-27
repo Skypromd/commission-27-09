@@ -1,0 +1,87 @@
+name: Dependency Updates & Security
+
+on:
+  schedule:
+    - cron: '0 2 * * 1'  # Every Monday at 2 AM
+  workflow_dispatch:
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Update Python dependencies
+      run: |
+        cd backend
+        pip install --upgrade pip
+        pip install pip-tools
+        pip-compile --upgrade requirements.in
+
+    - name: Update Node.js dependencies
+      run: |
+        cd frontend
+        npm update
+        npm audit fix --force
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "chore: update dependencies"
+        title: "🔄 Weekly dependency updates"
+        body: |
+          ## 🔄 Automated Dependency Updates
+
+          This PR contains weekly dependency updates for both backend and frontend.
+
+          ### Changes:
+          - Updated Python packages to latest compatible versions
+          - Updated Node.js packages and fixed security vulnerabilities
+
+          ### Review Checklist:
+          - [ ] All tests pass
+          - [ ] No breaking changes introduced
+          - [ ] Security vulnerabilities addressed
+        branch: dependency-updates
+        delete-branch: true
+
+  security-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run npm audit
+      run: |
+        cd frontend
+        npm audit --audit-level high
+
+    - name: Run Python security check
+      run: |
+        cd backend
+        pip install safety
+        safety check
+
+    - name: CodeQL Analysis
+      uses: github/codeql-action/init@v2
+      with:
+        languages: python, javascript
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2

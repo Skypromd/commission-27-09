@@ -1,0 +1,49 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "reset": "Reset"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "commissions": "Commissions",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "statistics": "Statistics",
+    "recentActivity": "Recent Activity"
+  },
+  "clients": {
+    "title": "Clients",
+    "addClient": "Add Client",
+    "editClient": "Edit Client",
+    "deleteClient": "Delete Client",
+    "clientDetails": "Client Details"
+  },
+  "commissions": {
+    "title": "Commissions",
+    "totalCommissions": "Total Commissions",
+    "pendingCommissions": "Pending Commissions",
+    "paidCommissions": "Paid Commissions"
+  }
+}

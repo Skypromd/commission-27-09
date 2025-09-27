@@ -1,0 +1,34 @@
+# Django and Core
+Django~=4.2
+djangorestframework~=3.14
+gunicorn~=23.0
+django-cors-headers~=4.3.1
+
+# Database
+psycopg2-binary~=2.9.9
+dj-database-url~=3.0.1
+
+# Async & Channels
+channels~=4.0
+channels-redis~=4.1
+
+# Celery
+celery~=5.3
+redis~=5.0
+django-celery-beat~=2.6
+
+# Configuration
+django-environ
+python-decouple~=3.8
+python-dotenv~=1.0
+
+# API & Schema
+drf-spectacular~=0.28
+djangorestframework-simplejwt~=5.3
+
+# Utilities
+whitenoise~=6.6
+django-mptt~=0.18
+django-filter~=25.1
+inflection~=0.5.1
+reportlab~=4.0.0

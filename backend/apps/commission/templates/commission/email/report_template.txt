@@ -1,0 +1,18 @@
+Hello, {{ manager_name }}!
+
+Here is your team's commission report for {{ report_date }}.
+
+---
+COMMISSION DETAILS
+---
+{% for commission in commissions %}
+- User: {{ commission.user.username }} | Deal: {{ commission.deal.title }} | Amount: £{{ commission.amount }}
+{% empty %}
+No paid commissions found for your team in this period.
+{% endfor %}
+---
+
+Total paid commission amount for your team: £{{ total_amount }}
+
+Best regards,
+UK Commission Admin Panel

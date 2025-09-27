@@ -1,0 +1,6 @@
+celery
+django-environ
+djangorestframework
+drf-spectacular
+psycopg2-binary
+redis

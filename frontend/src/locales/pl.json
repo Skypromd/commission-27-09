@@ -1,0 +1,49 @@
+{
+  "common": {
+    "loading": "Ładowanie...",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "add": "Dodaj",
+    "search": "Szukaj",
+    "filter": "Filtr",
+    "export": "Eksport",
+    "import": "Import",
+    "yes": "Tak",
+    "no": "Nie",
+    "ok": "OK",
+    "close": "Zamknij",
+    "back": "Wstecz",
+    "next": "Dalej",
+    "previous": "Poprzedni",
+    "submit": "Wyślij",
+    "reset": "Resetuj"
+  },
+  "navigation": {
+    "dashboard": "Panel sterowania",
+    "clients": "Klienci",
+    "commissions": "Prowizje",
+    "reports": "Raporty",
+    "settings": "Ustawienia"
+  },
+  "dashboard": {
+    "title": "Panel sterowania",
+    "overview": "Przegląd",
+    "statistics": "Statystyki",
+    "recentActivity": "Ostatnia aktywność"
+  },
+  "clients": {
+    "title": "Klienci",
+    "addClient": "Dodaj klienta",
+    "editClient": "Edytuj klienta",
+    "deleteClient": "Usuń klienta",
+    "clientDetails": "Szczegóły klienta"
+  },
+  "commissions": {
+    "title": "Prowizje",
+    "totalCommissions": "Całkowite prowizje",
+    "pendingCommissions": "Oczekujące prowizje",
+    "paidCommissions": "Wypłacone prowizje"
+  }
+}

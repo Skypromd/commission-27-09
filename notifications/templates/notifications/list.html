@@ -1,0 +1,359 @@
+{% extends 'base.html' %}
+
+{% block title %}Уведомления{% endblock %}
+
+{% block extra_css %}
+<style>
+    .notification-item {
+        transition: all 0.3s ease;
+    }
+
+    .notification-item:hover {
+        background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    .badge-info {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .badge-warning {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .badge-error {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .badge-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .notification-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .unread-notification {
+        border-left: 4px solid #007bff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="fas fa-bell me-2"></i>Уведомления</h1>
+
+        <div>
+            {% if notifications %}
+                {% if notifications.has_unread %}
+                    <a href="{% url 'mark_all_as_read' %}" class="btn btn-outline-primary me-2">
+                        <i class="fas fa-check-double"></i> Отметить все как прочитанные
+                    </a>
+                {% endif %}
+                <a href="{% url 'delete_all_read' %}" class="btn btn-outline-danger"
+                   onclick="return confirm('Вы действительно хотите удалить все прочитанные уведомления?')">
+                    <i class="fas fa-trash"></i> Удалить прочитанные
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Фильтры</h5>
+        </div>
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label for="type" class="form-label">Тип уведомления</label>
+                    <select name="type" id="type" class="form-select">
+                        <option value="">Все типы</option>
+                        <option value="info" {% if filter_type == 'info' %}selected{% endif %}>
+                            <i class="fas fa-info-circle"></i> Информация
+                        </option>
+                        <option value="warning" {% if filter_type == 'warning' %}selected{% endif %}>
+                            <i class="fas fa-exclamation-triangle"></i> Предупреждение
+                        </option>
+                        <option value="error" {% if filter_type == 'error' %}selected{% endif %}>
+                            <i class="fas fa-times-circle"></i> Ошибка
+                        </option>
+                        <option value="success" {% if filter_type == 'success' %}selected{% endif %}>
+                            <i class="fas fa-check-circle"></i> Успех
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="read" class="form-label">Статус</label>
+                    <select name="read" id="read" class="form-select">
+                        <option value="">Все статусы</option>
+                        <option value="true" {% if filter_read == 'true' %}selected{% endif %}>Прочитанные</option>
+                        <option value="false" {% if filter_read == 'false' %}selected{% endif %}>Непрочитанные</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="fas fa-search me-1"></i>Применить
+                    </button>
+                    <a href="{% url 'notification_list' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-undo me-1"></i>Сбросить
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            {% if notifications %}
+                <div class="list-group">
+                    {% for notification in notifications %}
+                    <div class="list-group-item notification-item {% if not notification.read %}unread-notification{% endif %}"
+                         id="notification-{{ notification.id }}">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">
+                                <span class="badge badge-{{ notification.notification_type }} rounded">
+                                    {% if notification.notification_type == 'info' %}
+                                        <i class="fas fa-info-circle me-1"></i>
+                                    {% elif notification.notification_type == 'warning' %}
+                                        <i class="fas fa-exclamation-triangle me-1"></i>
+                                    {% elif notification.notification_type == 'error' %}
+                                        <i class="fas fa-times-circle me-1"></i>
+                                    {% elif notification.notification_type == 'success' %}
+                                        <i class="fas fa-check-circle me-1"></i>
+                                    {% endif %}
+                                    {{ notification.get_notification_type_display }}
+                                </span>
+                            </h5>
+                            <small class="text-muted">{{ notification.created_at|date:"d.m.Y H:i" }}</small>
+                        </div>
+                        <p class="mb-1">{{ notification.message }}</p>
+                        <div class="mt-2 notification-actions">
+                            {% if notification.link %}
+                                <a href="{{ notification.link }}" class="btn btn-sm btn-outline-info">
+                                    <i class="fas fa-external-link-alt me-1"></i> Перейти
+                                </a>
+                            {% endif %}
+
+                            {% if not notification.read %}
+                            <button class="btn btn-sm btn-light mark-as-read"
+                                    data-id="{{ notification.id }}"
+                                    data-url="{% url 'mark_as_read' notification.id %}">
+                                <i class="fas fa-check me-1"></i> Отметить прочитанным
+                            </button>
+                            {% endif %}
+
+                            <button class="btn btn-sm btn-outline-danger delete-notification"
+                                    data-id="{{ notification.id }}"
+                                    data-url="{% url 'delete_notification' notification.id %}">
+                                <i class="fas fa-trash me-1"></i> Удалить
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Пагинация -->
+                {% if notifications.paginator.num_pages > 1 %}
+                <nav aria-label="Пагинация уведомлений" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        {% if notifications.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1{% if filter_type %}&type={{ filter_type }}{% endif %}{% if filter_read %}&read={{ filter_read }}{% endif %}">&laquo; Первая</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ notifications.previous_page_number }}{% if filter_type %}&type={{ filter_type }}{% endif %}{% if filter_read %}&read={{ filter_read }}{% endif %}">Предыдущая</a>
+                            </li>
+                        {% endif %}
+
+                        <li class="page-item active">
+                            <span class="page-link">
+                                {{ notifications.number }} из {{ notifications.paginator.num_pages }}
+                            </span>
+                        </li>
+
+                        {% if notifications.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ notifications.next_page_number }}{% if filter_type %}&type={{ filter_type }}{% endif %}{% if filter_read %}&read={{ filter_read }}{% endif %}">Следующая</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ notifications.paginator.num_pages }}{% if filter_type %}&type={{ filter_type }}{% endif %}{% if filter_read %}&read={{ filter_read }}{% endif %}">Последняя &raquo;</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-bell-slash fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">У вас нет уведомлений</p>
+                    {% if filter_type or filter_read %}
+                        <a href="{% url 'notification_list' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-undo me-1"></i>Сбросить фильтры
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Обработчик кнопок "Отметить как прочитанное"
+    const markAsReadButtons = document.querySelectorAll('.mark-as-read');
+
+    markAsReadButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            const notificationId = this.getAttribute('data-id');
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const listItem = document.getElementById(`notification-${notificationId}`);
+                    listItem.classList.remove('unread-notification');
+                    this.remove();
+
+                    // Показываем уведомление об успехе
+                    showToast('Уведомление отмечено как прочитанное', 'success');
+
+                    // Обновляем счетчик непрочитанных уведомлений
+                    updateUnreadCount();
+                }
+            })
+            .catch(error => {
+                showToast('Ошибка при обработке запроса', 'danger');
+                console.error('Error:', error);
+            });
+        });
+    });
+
+    // Обработчик кнопок удаления
+    const deleteButtons = document.querySelectorAll('.delete-notification');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (confirm('Вы действительно хотите удалить это уведомление?')) {
+                const url = this.getAttribute('data-url');
+                const notificationId = this.getAttribute('data-id');
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const listItem = document.getElementById(`notification-${notificationId}`);
+                        listItem.remove();
+
+                        // Показываем уведомление об успехе
+                        showToast('Уведомление удалено', 'success');
+
+                        // Если это было последнее уведомление
+                        const notifications = document.querySelectorAll('.notification-item');
+                        if (notifications.length === 0) {
+                            location.reload();
+                        }
+                    }
+                })
+                .catch(error => {
+                    showToast('Ошибка при удалении уведомления', 'danger');
+                    console.error('Error:', error);
+                });
+            }
+        });
+    });
+
+    // Функция для обновления счетчика непрочитанных
+    function updateUnreadCount() {
+        fetch('{% url "notification_unread_count" %}')
+            .then(response => response.json())
+            .then(data => {
+                // Обновляем счетчик на странице уведомлений, если он есть
+                const unreadCountBadge = document.getElementById('unread-count-badge');
+                if (unreadCountBadge) {
+                    unreadCountBadge.textContent = data.count;
+
+                    if (data.count > 0) {
+                        unreadCountBadge.style.display = 'inline-block';
+                    } else {
+                        unreadCountBadge.style.display = 'none';
+                    }
+                }
+            });
+    }
+
+    // Функция для отображения уведомлений
+    function showToast(message, type) {
+        const toastContainer = document.createElement('div');
+        toastContainer.className = `toast-container position-fixed bottom-0 end-0 p-3`;
+        toastContainer.style.zIndex = '9999';
+
+        const toastElement = document.createElement('div');
+        toastElement.className = `toast align-items-center text-white bg-${type} border-0`;
+        toastElement.setAttribute('role', 'alert');
+        toastElement.setAttribute('aria-live', 'assertive');
+        toastElement.setAttribute('aria-atomic', 'true');
+
+        toastElement.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        `;
+
+        toastContainer.appendChild(toastElement);
+        document.body.appendChild(toastContainer);
+
+        const toast = new bootstrap.Toast(toastElement, {
+            autohide: true,
+            delay: 3000
+        });
+
+        toast.show();
+
+        // Удаляем элемент после скрытия
+        toastElement.addEventListener('hidden.bs.toast', function() {
+            toastContainer.remove();
+        });
+    }
+
+    // Функция для получения CSRF-токена из cookie
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Test and coverage reports
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Database files
+db.sqlite3
+db.sqlite3-journal
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Django specific
+media/
+staticfiles/
+local_settings.py
+
+# Environment variables
+.env.local
+.env.production
+
+# SSL certificates
+*.pem
+*.crt
+*.key

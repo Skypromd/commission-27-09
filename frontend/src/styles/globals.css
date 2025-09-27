@@ -1,0 +1,108 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
+
+:root {
+  /*
+   * Professional government admin panel theme
+   * Base colors for clean, authoritative interface
+   */
+  --background: 255 255 255; /* Pure white background */
+  --foreground: 15 23 42; /* Very dark slate for primary text */
+
+  --card: 248 250 252; /* Very light slate for cards */
+  --card-foreground: 15 23 42; /* Dark text on cards */
+  --popover: 255 255 255; /* White popover background */
+  --popover-foreground: 15 23 42; /* Dark text in popovers */
+
+  /*
+   * Action colors for professional government interface
+   * Navy blue primary with gold accents
+   */
+  --primary: 30 58 138; /* Deep navy blue for authority */
+  --primary-foreground: 255 255 255; /* White text on navy */
+  --secondary: 71 85 105; /* Slate-600 for secondary actions */
+  --secondary-foreground: 255 255 255; /* White text on slate */
+  --accent: 245 158 11; /* Amber gold for important highlights */
+  --accent-foreground: 15 23 42; /* Dark text on gold accent */
+  --destructive: 220 38 38; /* Professional red for warnings */
+  --destructive-foreground: 255 255 255; /* White text on red */
+
+  /*
+   * Supporting UI colors for professional interface
+   */
+  --muted: 241 245 249; /* Very light slate background */
+  --muted-foreground: 71 85 105; /* Muted slate text */
+  --border: 226 232 240; /* Subtle slate borders */
+  --input: 226 232 240; /* Input border color */
+  --ring: 30 58 138; /* Navy focus rings */
+
+  /*
+   * Professional border radius for clean appearance
+   */
+  --radius: 0.5rem;
+}
+
+/* Base styling */
+body {
+  @apply bg-background text-foreground antialiased;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Professional government styling */
+.gov-header {
+  background: rgb(var(--primary));
+  color: rgb(var(--primary-foreground));
+}
+
+.gov-sidebar {
+  background: rgb(var(--card));
+  border-right: 1px solid rgb(var(--border));
+}
+
+.gov-card {
+  background: rgb(var(--card));
+  color: rgb(var(--card-foreground));
+  border: 1px solid rgb(var(--border));
+  border-radius: var(--radius);
+}
+
+.gov-button-primary {
+  background: rgb(var(--primary));
+  color: rgb(var(--primary-foreground));
+  border-radius: var(--radius);
+}
+
+.gov-button-primary:hover {
+  opacity: 0.9;
+}
+
+.gov-accent {
+  background: rgb(var(--accent));
+  color: rgb(var(--accent-foreground));
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--muted-foreground));
+}

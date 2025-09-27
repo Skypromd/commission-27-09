@@ -1,0 +1,49 @@
+{
+  "common": {
+    "loading": "Зареждане...",
+    "save": "Запази",
+    "cancel": "Отказ",
+    "delete": "Изтрий",
+    "edit": "Редактирай",
+    "add": "Добави",
+    "search": "Търсене",
+    "filter": "Филтър",
+    "export": "Експорт",
+    "import": "Импорт",
+    "yes": "Да",
+    "no": "Не",
+    "ok": "ОК",
+    "close": "Затвори",
+    "back": "Назад",
+    "next": "Напред",
+    "previous": "Предишен",
+    "submit": "Изпрати",
+    "reset": "Нулирай"
+  },
+  "navigation": {
+    "dashboard": "Табло",
+    "clients": "Клиенти",
+    "commissions": "Комисионни",
+    "reports": "Отчети",
+    "settings": "Настройки"
+  },
+  "dashboard": {
+    "title": "Табло",
+    "overview": "Преглед",
+    "statistics": "Статистики",
+    "recentActivity": "Последна активност"
+  },
+  "clients": {
+    "title": "Клиенти",
+    "addClient": "Добави клиент",
+    "editClient": "Редактирай клиент",
+    "deleteClient": "Изтрий клиент",
+    "clientDetails": "Детайли за клиента"
+  },
+  "commissions": {
+    "title": "Комисионни",
+    "totalCommissions": "Общо комисионни",
+    "pendingCommissions": "Изчакващи комисионни",
+    "paidCommissions": "Платени комисионни"
+  }
+}
