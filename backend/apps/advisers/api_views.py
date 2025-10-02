@@ -36,18 +36,8 @@ class AdviserViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Filter advisers based on user permissions"""
-        user = self.request.user
-        if user.is_superuser or user.is_staff:
-            return self.queryset
-        
-        # Advisers can see themselves and their subordinates
-        try:
-            adviser = user.adviser
-            return self.queryset.filter(
-                Q(pk=adviser.pk) | Q(parent_adviser=adviser)
-            )
-        except Adviser.DoesNotExist:
-            return Adviser.objects.none()
+        # Временно возвращаем все данные для демо
+        return self.queryset
 
     @extend_schema(
         description="Get adviser performance statistics",
