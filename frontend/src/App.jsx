@@ -11,6 +11,9 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [loginLoading, setLoginLoading] = useState(false);
+  const [authMode, setAuthMode] = useState('login'); // 'login', 'register', '2fa'
+  const [twoFactorCode, setTwoFactorCode] = useState('');
+  const [pendingUser, setPendingUser] = useState(null);
   
   // Определяем backend URL
   const API_BASE = window.location.hostname.includes('preview.emergentagent.com') 
