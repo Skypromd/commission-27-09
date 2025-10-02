@@ -46,7 +46,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # API Root
     path("api/", api_root, name="api-root"),
-    # API Apps (основные модули)
+    # API Apps - ВСЕ МОДУЛИ
     path("api/advisers/", include("apps.advisers.urls")),
     path("api/users/", include("apps.users.urls")),
     path("api/clients/", include("apps.clients.urls")), 
@@ -54,8 +54,14 @@ urlpatterns = [
     path("api/policies/", include("apps.policies.urls")),
     path("api/deals/", include("apps.deals.urls")),
     path("api/commission/", include("apps.commission.urls")),
-    path("api/insurances/", include("apps.insurances.urls")),  # Включено
-    path("api/mortgage/", include("apps.mortgage.urls")),      # Включено
+    path("api/insurances/", include("apps.insurances.urls")),
+    path("api/mortgage/", include("apps.mortgage.urls")),
+    path("api/sales/", include("apps.sales.urls")),
+    path("api/reports/", include("apps.reports.urls")),
+    path("api/notifications/", include("apps.notifications.urls")),
+    path("api/audit/", include("apps.audit.urls")),
+    path("api/tasks/", include("apps.tasks.urls")),
+    path("api/bi/", include("apps.bi_analytics.urls")),
     # path("api/sales/", include("apps.sales.urls")),
     # path("api/reports/", include("apps.reports.urls")),
     # path("api/notifications/", include("apps.notifications.urls")),
