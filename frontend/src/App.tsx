@@ -112,11 +112,12 @@ function App() {
         
         return { success: true };
       } else {
+        console.error('Login failed:', data);
         return { success: false, error: data.error || 'Login failed' };
       }
     } catch (error) {
       console.error('Login error:', error);
-      return { success: false, error: 'Connection error' };
+      return { success: false, error: `Connection error: ${error.message}` };
     } finally {
       setLoginLoading(false);
     }
