@@ -9,7 +9,18 @@ from django.utils import timezone
 from datetime import timedelta
 
 from .models import Pipeline, Stage
-from .serializers import PipelineSerializer, StageSerializer
+# Временно используем простые сериализаторы
+from rest_framework import serializers
+
+class PipelineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pipeline
+        fields = '__all__'
+
+class StageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stage
+        fields = '__all__'
 from apps.core.permissions import IsOwnerOrManager
 
 
