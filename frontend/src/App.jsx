@@ -605,7 +605,19 @@ function App() {
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
+          {loading && (
+            <div className="fixed top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg z-50">
+              <div className="flex items-center space-x-2">
+                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                <span>Loading...</span>
+              </div>
+            </div>
+          )}
+          
           {currentView === 'dashboard' && <DashboardView />}
+          {['deals', 'advisers', 'clients', 'products'].includes(currentView) && (
+            <ModuleView module={currentView} data={data} />
+          )}
         </div>
       </main>
     </div>
