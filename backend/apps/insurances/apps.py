@@ -7,4 +7,4 @@ class InsurancesConfig(AppConfig):
 
     def ready(self):
         # Import signals to connect them when the app is ready.
-        import backend.apps.insurances.signals
+        import apps.insurances.signals
