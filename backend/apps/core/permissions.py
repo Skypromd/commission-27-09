@@ -60,3 +60,11 @@ class IsOwnerOrManager(permissions.BasePermission):
             return True
 
         return False
+
+
+class HasReportAccess(permissions.BasePermission):
+    """
+    Разрешение для доступа к отчетам.
+    """
+    def has_permission(self, request, view):
+        return request.user and request.user.is_authenticated
