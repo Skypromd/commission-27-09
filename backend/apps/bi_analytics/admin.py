@@ -1,4 +1,4 @@
 from django.contrib import admin
 
-# Audit module admin
+# BI Analytics module admin
 # Will be implemented with actual models
