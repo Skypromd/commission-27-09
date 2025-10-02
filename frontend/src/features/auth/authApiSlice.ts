@@ -48,6 +48,23 @@ export const authApiSlice = api.injectEndpoints({
         }
       },
     }),
+    register: builder.mutation<{ token: string; user: any }, any>({
+      query: (userData) => ({
+        url: 'users/auth/register/',
+        method: 'POST',
+        body: userData,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          if (data.success) {
+            dispatch(setCredentials({ token: data.token, user: data.user }));
+          }
+        } catch (error) {
+          // Обработка ошибок регистрации
+        }
+      },
+    }),
   }),
 });
 
