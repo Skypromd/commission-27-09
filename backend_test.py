@@ -536,7 +536,7 @@ class AuthenticationTester:
             
             # Step 2: Login with new user
             login_response = self.session.post(f"{API_BASE}/users/auth/login/", json={
-                "username": "flowtest456",
+                "username": f"flowtest{flow_timestamp}",
                 "password": "FlowTestPassword123!"
             })
             
