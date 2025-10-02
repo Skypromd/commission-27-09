@@ -29,11 +29,11 @@ class InsuranceTypeAdmin(admin.ModelAdmin):
     list_display = ('name', 'description')
     search_fields = ('name',)
 
-@admin.register(IngestionTask)
-class IngestionTaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'status', 'created_by', 'created_at', 'finished_at')
+@admin.register(InsuranceIngestionTask)
+class InsuranceIngestionTaskAdmin(admin.ModelAdmin):
+    list_display = ('id', 'status', 'created_by', 'created_at')
     list_filter = ('status',)
-    readonly_fields = ('created_at', 'finished_at', 'report', 'task_id', 'created_by')
+    readonly_fields = ('created_at', 'created_by')
 
 # Регистрация остальных моделей
 admin.site.register(Retention)
