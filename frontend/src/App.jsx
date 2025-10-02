@@ -543,6 +543,22 @@ function App() {
                 stats: '127 active policies'
               },
               { 
+                name: 'Insurances', 
+                key: 'insurances',
+                icon: '🛡️', 
+                desc: 'Insurance Policies',
+                color: 'hover:bg-teal-50 hover:border-teal-200',
+                stats: data.insurances ? `${data.insurances.count || data.insurances.results?.length || 0} policies` : 'Loading...'
+              },
+              { 
+                name: 'Mortgage', 
+                key: 'mortgages',
+                icon: '🏠', 
+                desc: 'Mortgage Lending',
+                color: 'hover:bg-pink-50 hover:border-pink-200',
+                stats: data.mortgages ? `${data.mortgages.count || data.mortgages.results?.length || 0} applications` : 'Loading...'
+              },
+              { 
                 name: 'Commissions', 
                 key: 'commissions',
                 icon: '💰', 
