@@ -72,17 +72,29 @@ function App() {
   };
 
   const loadModuleData = async (module) => {
+    console.log('Loading module:', module);
     setLoading(true);
     setSelectedModule(module);
+    
     try {
-      const response = await fetch(`${API_BASE}/${module}/${module}/`);
+      const url = `${API_BASE}/${module}/${module}/`;
+      console.log('Fetching URL:', url);
+      
+      const response = await fetch(url);
+      console.log('Response status:', response.status);
+      
       if (response.ok) {
         const moduleData = await response.json();
+        console.log('Module data loaded:', moduleData);
         setData(prev => ({ ...prev, [module]: moduleData }));
         setCurrentView(module);
+      } else {
+        console.error('API Error:', response.status, response.statusText);
+        alert(`Ошибка загрузки модуля ${module}: ${response.status}`);
       }
     } catch (error) {
-      console.log(`Error loading ${module} data:`, error);
+      console.error(`Error loading ${module} data:`, error);
+      alert(`Ошибка подключения к модулю ${module}: ${error.message}`);
     } finally {
       setLoading(false);
     }
