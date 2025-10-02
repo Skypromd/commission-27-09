@@ -54,9 +54,8 @@ urlpatterns = [
     path("api/policies/", include("apps.policies.urls")),
     path("api/deals/", include("apps.deals.urls")),
     path("api/commission/", include("apps.commission.urls")),
-    # Проблемные модули временно отключены
-    # path("api/insurances/", include("apps.insurances.urls")),
-    # path("api/mortgage/", include("apps.mortgage.urls")),
+    path("api/insurances/", include("apps.insurances.urls")),  # Включено
+    path("api/mortgage/", include("apps.mortgage.urls")),      # Включено
     # path("api/sales/", include("apps.sales.urls")),
     # path("api/reports/", include("apps.reports.urls")),
     # path("api/notifications/", include("apps.notifications.urls")),
