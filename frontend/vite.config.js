@@ -9,7 +9,17 @@ export default defineConfig({
     port: 3000,
     host: '0.0.0.0',
     // Разрешаем все хосты для Preview URLs
-    allowedHosts: 'all'
+    allowedHosts: [
+      'rushelp.preview.emergentagent.com',
+      '.preview.emergentagent.com',
+      '*.preview.emergentagent.com',
+      'localhost',
+      '127.0.0.1',
+      'all'
+    ],
+    hmr: {
+      clientPort: 3000
+    }
   },
   build: {
     outDir: 'dist',
