@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 
 from .models import Adviser
 from .serializers import AdviserSerializer
-from apps.core.permissions import IsOwnerOrManager
+# from apps.core.permissions import IsOwnerOrManager  # Временно отключено
 
 
 @extend_schema_view(
