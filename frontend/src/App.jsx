@@ -1074,7 +1074,7 @@ function App() {
           )}
           
           {currentView === 'dashboard' && <DashboardView />}
-          {['deals', 'advisers', 'clients', 'products'].includes(currentView) && (
+          {['deals', 'advisers', 'clients', 'products', 'insurances', 'mortgages', 'sales', 'reports', 'notifications', 'tasks', 'audit', 'bi'].includes(currentView) && (
             <ModuleView module={currentView} data={data} />
           )}
         </div>
