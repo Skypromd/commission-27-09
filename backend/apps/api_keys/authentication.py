@@ -1,4 +1,4 @@
-from rest_framework_api_key.authentication import APIKeyAuthentication
+from rest_framework_api_key.authentication import APIKeyAuthentication as BaseAPIKeyAuthentication
 from .models import UserAPIKey
 
 
