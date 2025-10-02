@@ -541,6 +541,279 @@ function App() {
     </div>
   );
 
+  // Компоненты для новых модулей
+  const InsurancesModule = ({ data }) => (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">🛡️ Insurance Policies</h3>
+        {data.results ? (
+          <div className="space-y-3">
+            {data.results.map((policy, index) => (
+              <div key={index} className="flex justify-between items-center p-3 border rounded-lg">
+                <div>
+                  <div className="font-medium">{policy.policy_number}</div>
+                  <div className="text-sm text-gray-600">{policy.type}</div>
+                </div>
+                <div className="text-right">
+                  <div className="font-semibold">${policy.premium}</div>
+                  <div className="text-sm text-gray-600">{policy.status}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">Loading policies...</div>
+        )}
+      </div>
+      <div className="bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg p-6 text-white">
+        <h3 className="text-lg font-semibold mb-4">📊 Policy Stats</h3>
+        <div className="space-y-3">
+          <div className="flex justify-between">
+            <span>Total Policies:</span>
+            <span className="font-bold">{data.count || 0}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Active:</span>
+            <span className="font-bold">85%</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Claims Ratio:</span>
+            <span className="font-bold">12%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const MortgagesModule = ({ data }) => (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">🏠 Mortgage Applications</h3>
+        {data.results ? (
+          <div className="space-y-3">
+            {data.results.map((mortgage, index) => (
+              <div key={index} className="flex justify-between items-center p-3 border rounded-lg">
+                <div>
+                  <div className="font-medium">{mortgage.client}</div>
+                  <div className="text-sm text-gray-600">{mortgage.application_number}</div>
+                </div>
+                <div className="text-right">
+                  <div className="font-semibold">${mortgage.amount.toLocaleString()}</div>
+                  <div className="text-sm text-gray-600">{mortgage.rate}% - {mortgage.status}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">Loading applications...</div>
+        )}
+      </div>
+      <div className="bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg p-6 text-white">
+        <h3 className="text-lg font-semibold mb-4">📈 Lending Stats</h3>
+        <div className="space-y-3">
+          <div className="flex justify-between">
+            <span>Applications:</span>
+            <span className="font-bold">{data.count || 0}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Approval Rate:</span>
+            <span className="font-bold">78%</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Avg Rate:</span>
+            <span className="font-bold">3.5%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const SalesModule = ({ data }) => (
+    <div className="bg-white rounded-lg shadow p-6">
+      <h3 className="text-lg font-semibold mb-4">💰 Sales Performance</h3>
+      {data.results ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {data.results.map((sale, index) => (
+            <div key={index} className="p-4 border rounded-lg">
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="font-medium">{sale.adviser}</div>
+                  <div className="text-sm text-gray-600">{sale.client}</div>
+                </div>
+                <div className="text-right">
+                  <div className="font-semibold">${sale.amount.toLocaleString()}</div>
+                  <div className="text-sm text-gray-600">{sale.status}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="p-4 bg-green-50 rounded-lg">
+            <div className="text-lg font-semibold text-green-600">Total Sales</div>
+            <div className="text-2xl font-bold">${data.total_sales?.toLocaleString() || 0}</div>
+            <div className="text-sm text-gray-600">Target: ${data.monthly_target?.toLocaleString() || 0}</div>
+          </div>
+        </div>
+      ) : (
+        <div className="text-center text-gray-500">Loading sales data...</div>
+      )}
+    </div>
+  );
+
+  const ReportsModule = ({ data }) => (
+    <div className="bg-white rounded-lg shadow p-6">
+      <h3 className="text-lg font-semibold mb-4">📊 Available Reports</h3>
+      {data.results ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {data.results.map((report, index) => (
+            <div key={index} className="p-4 border rounded-lg hover:shadow-md transition-shadow">
+              <div className="font-medium">{report.name}</div>
+              <div className="text-sm text-gray-600 mt-1">{report.type}</div>
+              <div className="text-xs text-gray-500 mt-2">Generated: {report.generated}</div>
+              <div className="mt-3">
+                <span className={`px-2 py-1 text-xs rounded-full ${report.status === 'ready' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                  {report.status}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-gray-500">Loading reports...</div>
+      )}
+    </div>
+  );
+
+  const NotificationsModule = ({ data }) => (
+    <div className="bg-white rounded-lg shadow p-6">
+      <h3 className="text-lg font-semibold mb-4">🔔 Recent Notifications</h3>
+      {data.results ? (
+        <div className="space-y-3">
+          {data.results.map((notification, index) => (
+            <div key={index} className={`p-4 border rounded-lg ${!notification.read ? 'bg-blue-50 border-blue-200' : 'bg-gray-50'}`}>
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <div className="font-medium">{notification.title}</div>
+                  <div className="text-sm text-gray-600 mt-1">{notification.message}</div>
+                  <div className="text-xs text-gray-500 mt-2">{new Date(notification.created).toLocaleString()}</div>
+                </div>
+                {!notification.read && (
+                  <div className="w-2 h-2 bg-blue-600 rounded-full ml-2 mt-1"></div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-gray-500">Loading notifications...</div>
+      )}
+    </div>
+  );
+
+  const TasksModule = ({ data }) => (
+    <div className="bg-white rounded-lg shadow p-6">
+      <h3 className="text-lg font-semibold mb-4">📝 Task Management</h3>
+      {data.results ? (
+        <div className="space-y-3">
+          {data.results.map((task, index) => (
+            <div key={index} className="p-4 border rounded-lg">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <div className="font-medium">{task.title}</div>
+                  <div className="text-sm text-gray-600 mt-1">{task.description}</div>
+                  <div className="text-xs text-gray-500 mt-2">Due: {task.due_date} | Assigned: {task.assigned_to}</div>
+                </div>
+                <div>
+                  <span className={`px-2 py-1 text-xs rounded-full ${
+                    task.status === 'completed' ? 'bg-green-100 text-green-800' :
+                    task.status === 'in_progress' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-gray-100 text-gray-800'
+                  }`}>
+                    {task.status}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-gray-500">Loading tasks...</div>
+      )}
+    </div>
+  );
+
+  const AuditModule = ({ data }) => (
+    <div className="bg-white rounded-lg shadow p-6">
+      <h3 className="text-lg font-semibold mb-4">🔍 System Audit Log</h3>
+      {data.results ? (
+        <div className="space-y-2">
+          {data.results.map((log, index) => (
+            <div key={index} className="p-3 border rounded-lg text-sm">
+              <div className="flex justify-between items-center">
+                <div>
+                  <span className="font-medium">{log.action}</span>
+                  <span className="text-gray-600 ml-2">by {log.user}</span>
+                </div>
+                <div className="text-xs text-gray-500">
+                  {new Date(log.timestamp).toLocaleString()}
+                </div>
+              </div>
+              {log.details && (
+                <div className="text-gray-600 text-xs mt-1">{log.details}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center text-gray-500">Loading audit logs...</div>
+      )}
+    </div>
+  );
+
+  const BiAnalyticsModule = ({ data }) => (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">📈 Key Performance Indicators</h3>
+        {data.kpi_data ? (
+          <div className="space-y-4">
+            {data.kpi_data.map((kpi, index) => (
+              <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <div className="font-medium">{kpi.metric}</div>
+                  <div className="text-xs text-gray-600">{kpi.period}</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-lg font-bold">{kpi.value}</div>
+                  <div className={`text-xs ${kpi.trend === 'up' ? 'text-green-600' : kpi.trend === 'down' ? 'text-red-600' : 'text-gray-600'}`}>
+                    {kpi.trend === 'up' ? '↗️' : kpi.trend === 'down' ? '↘️' : '→'} {kpi.trend}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">Loading KPIs...</div>
+        )}
+      </div>
+      <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-lg p-6 text-white">
+        <h3 className="text-lg font-semibold mb-4">🎯 Business Insights</h3>
+        {data.predictive_insights ? (
+          <div className="space-y-3">
+            <div>
+              <div className="font-medium">Forecast:</div>
+              <div className="text-sm">{data.predictive_insights.next_month_forecast}</div>
+            </div>
+            <div>
+              <div className="font-medium">Opportunities:</div>
+              <div className="text-sm">{data.predictive_insights.opportunities?.join(', ')}</div>
+            </div>
+          </div>
+        ) : (
+          <div>Loading insights...</div>
+        )}
+      </div>
+    </div>
+  );
+
   const DashboardView = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {/* Status Card */}
