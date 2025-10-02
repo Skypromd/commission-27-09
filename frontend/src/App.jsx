@@ -17,8 +17,8 @@ function App() {
   
   // Определяем backend URL
   const API_BASE = window.location.hostname.includes('preview.emergentagent.com') 
-    ? `https://${window.location.hostname.replace('3001', '8080')}/api`
-    : 'http://localhost:8080/api';
+    ? `https://${window.location.hostname.replace('3001', '8001')}/api`
+    : 'http://localhost:8001/api';
 
   useEffect(() => {
     // Проверяем авторизацию при загрузке
