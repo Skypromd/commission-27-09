@@ -3,6 +3,6 @@ from .models import Client
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'agent', 'risk_category', 'corporate_client_flag')
-    search_fields = ('name', 'agent__username')
-    list_filter = ('risk_category', 'corporate_client_flag', 'agent')
+    list_display = ('name', 'agent', 'email', 'created_at')
+    search_fields = ('name', 'agent__username', 'email')
+    list_filter = ('agent', 'created_at')
