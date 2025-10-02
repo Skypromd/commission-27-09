@@ -26,7 +26,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     """
     queryset = Product.objects.select_related('category').all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdminOrReadOnly]
+    permission_classes = [permissions.AllowAny]  # Временно для демо
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['name', 'provider', 'description']
     ordering_fields = ['name', 'created_at', 'category__name']
@@ -142,7 +142,7 @@ class ProductCategoryViewSet(viewsets.ModelViewSet):
     """
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategorySerializer
-    permission_classes = [permissions.IsAuthenticated, IsAdminOrReadOnly]
+    permission_classes = [permissions.AllowAny]  # Временно для демо
     search_fields = ['name', 'description']
     ordering = ['name']
 
