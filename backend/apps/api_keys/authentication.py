@@ -2,7 +2,7 @@ from rest_framework_api_key.authentication import APIKeyAuthentication as BaseAP
 from .models import UserAPIKey
 
 
-class UserAPIKeyAuthentication(APIKeyAuthentication):
+class UserAPIKeyAuthentication(BaseAPIKeyAuthentication):
     """
     Кастомный класс аутентификации, который использует нашу модель UserAPIKey.
     При успешной аутентификации по ключу, `request.user` будет установлен
