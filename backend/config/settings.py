@@ -42,23 +42,24 @@ INSTALLED_APPS = [
     "rest_framework_api_key", 
     "corsheaders",
     "drf_spectacular",
-    # Your Project Apps  
+    # Your Project Apps - ВСЕ МОДУЛИ ВКЛЮЧЕНЫ
     "apps.core",  # Your core app with shared logic
     "apps.users",
     "apps.advisers",
     "apps.clients", 
     "apps.products",
     "apps.policies",
-    "apps.deals",
+    "apps.deals", 
     "apps.commission",
-    "apps.insurances",  # Включено для ипотеки
-    "apps.mortgage",    # Включено для страхования
-    # "apps.sales",
-    # "apps.reports", 
-    # "apps.notifications",
-    # "apps.audit",
-    # "apps.tasks",
-    # "apps.bi_analytics",
+    "apps.insurances",
+    "apps.mortgage",
+    "apps.sales",
+    "apps.reports", 
+    "apps.notifications",
+    "apps.audit",
+    "apps.tasks",
+    "apps.bi_analytics",
+    "apps.api_keys",
 ]
 
 MIDDLEWARE = [
