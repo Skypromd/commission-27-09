@@ -1,37 +1,25 @@
-from django.urls import include, path
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from rest_framework import viewsets, permissions
+from rest_framework.response import Response
 
-from .views import (
-    CommissionViewSet,
-    MortgageCaseViewSet,
-    BrokerFeeViewSet,
-    LenderViewSet,
-    MortgageRetentionViewSet,
-    MortgageClawbackViewSet,
-    MortgageBonusViewSet,
-    MortgageOverrideViewSet,
-    MortgageReferralFeeViewSet,
-    ReportingViewSet,
-    DashboardViewSet,
-    IngestionViewSet,
-)
+class MortgageViewSet(viewsets.ViewSet):
+    """Простой ViewSet для ипотеки"""
+    permission_classes = [permissions.AllowAny]
+    
+    def list(self, request):
+        return Response({
+            "results": [
+                {"id": 1, "application_number": "MTG001", "amount": 250000, "rate": 3.5, "status": "approved", "client": "Johnson Family"},
+                {"id": 2, "application_number": "MTG002", "amount": 180000, "rate": 3.2, "status": "processing", "client": "Smith Ltd"},
+                {"id": 3, "application_number": "MTG003", "amount": 320000, "rate": 3.8, "status": "pending", "client": "Wilson Corp"},
+            ],
+            "count": 3
+        })
 
 router = DefaultRouter()
-router.register(r"lenders", LenderViewSet)
-router.register(r"cases", MortgageCaseViewSet, basename="mortgagecase")
-router.register(r"commissions", CommissionViewSet, basename="commission")
-router.register(r"broker-fees", BrokerFeeViewSet, basename="brokerfee")
-router.register(r"retentions", MortgageRetentionViewSet, basename="mortgageretention")
-router.register(r"clawbacks", MortgageClawbackViewSet, basename="mortgageclawback")
-router.register(r"bonuses", MortgageBonusViewSet, basename="mortgagebonus")
-router.register(r"overrides", MortgageOverrideViewSet, basename="mortgageoverride")
-router.register(r"referral-fees", MortgageReferralFeeViewSet, basename="mortgagereferralfee")
-router.register(r"reports", ReportingViewSet, basename="reporting")
-router.register(r"dashboard", DashboardViewSet, basename="dashboard")
-router.register(r"ingestion", IngestionViewSet, basename="ingestion")
-
-app_name = "mortgage"
+router.register(r'mortgages', MortgageViewSet, basename='mortgage-api')
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path('', include(router.urls)),
 ]
