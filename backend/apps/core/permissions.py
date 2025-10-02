@@ -2,6 +2,18 @@ from rest_framework import permissions
 from apps.advisers.models import Adviser
 
 
+class IsAdminOrReadOnly(permissions.BasePermission):
+    """
+    Разрешение только для чтения всем пользователям, полный доступ только администраторам.
+    """
+    def has_permission(self, request, view):
+        # Доступ на чтение для всех
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        # Доступ на запись только для администраторов
+        return request.user and request.user.is_staff
+
+
 class IsOwnerOrManager(permissions.BasePermission):
     """
     Разрешение, которое позволяет доступ:
