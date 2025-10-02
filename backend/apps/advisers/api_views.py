@@ -27,7 +27,7 @@ class AdviserViewSet(viewsets.ModelViewSet):
     """
     queryset = Adviser.objects.select_related('user', 'parent_adviser').all()
     serializer_class = AdviserSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrManager]
+    permission_classes = [permissions.AllowAny]  # Временно для демо
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['user__first_name', 'user__last_name', 'user__email', 'role']
     ordering_fields = ['user__first_name', 'role', 'start_date']
