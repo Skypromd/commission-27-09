@@ -178,6 +178,54 @@ function App() {
         color: 'bg-orange-600',
         metrics: data?.products || {},
         actions: ['Product List', 'Sales Analytics', 'Inventory']
+      },
+      insurances: {
+        title: '🛡️ Insurance Policies',
+        color: 'bg-teal-600',
+        metrics: data?.insurances || {},
+        actions: ['Policy List', 'Claims', 'Renewals']
+      },
+      mortgages: {
+        title: '🏠 Mortgage Lending',
+        color: 'bg-pink-600', 
+        metrics: data?.mortgages || {},
+        actions: ['Applications', 'Approvals', 'Payments']
+      },
+      sales: {
+        title: '💰 Sales Management',
+        color: 'bg-yellow-600',
+        metrics: data?.sales || {},
+        actions: ['Sales List', 'Targets', 'Performance']
+      },
+      reports: {
+        title: '📊 Reports & Analytics',
+        color: 'bg-red-600',
+        metrics: data?.reports || {},
+        actions: ['Generate Reports', 'Dashboards', 'Exports']
+      },
+      notifications: {
+        title: '🔔 Notifications',
+        color: 'bg-blue-600',
+        metrics: data?.notifications || {},
+        actions: ['View All', 'Settings', 'History']
+      },
+      tasks: {
+        title: '📝 Task Management',
+        color: 'bg-green-600',
+        metrics: data?.tasks || {},
+        actions: ['Task List', 'Assignments', 'Calendar']
+      },
+      audit: {
+        title: '🔍 System Audit',
+        color: 'bg-purple-600',
+        metrics: data?.audit || {},
+        actions: ['Audit Log', 'Security', 'Compliance']
+      },
+      bi: {
+        title: '📈 Business Intelligence',
+        color: 'bg-indigo-600',
+        metrics: data?.bi || {},
+        actions: ['KPI Dashboard', 'Forecasting', 'Insights']
       }
     };
 
