@@ -1437,10 +1437,19 @@ function App() {
             </form>
             
             <div className="mt-6 text-center">
-              <div className="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
-                <strong>Demo Credentials:</strong><br/>
-                Username: admin<br/>
-                Password: admin
+              <button
+                onClick={() => setAuthMode('register')}
+                className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+              >
+                Don't have an account? Create one
+              </button>
+            </div>
+            
+            <div className="mt-4 text-center">
+              <div className="text-xs text-gray-500 bg-gray-50 p-4 rounded-lg">
+                <strong>Create an account or use demo:</strong><br/>
+                Demo Username: admin<br/>
+                Demo Password: admin
               </div>
             </div>
           </div>
