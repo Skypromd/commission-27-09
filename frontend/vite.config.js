@@ -7,19 +7,25 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    host: '0.0.0.0',
-    // Разрешаем все хосты для Preview URLs
-    allowedHosts: [
-      'rushelp.preview.emergentagent.com',
-      '.preview.emergentagent.com',
-      '*.preview.emergentagent.com',
-      'localhost',
-      '127.0.0.1',
-      'all'
-    ],
+    host: true,
+    // Полностью отключаем проверку хостов для Preview URLs
+    strictPort: false,
     hmr: {
-      clientPort: 3000
+      port: 3000
+    },
+    // Добавляем заголовки для работы с любыми доменами
+    cors: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With'
     }
+  },
+  // Для Vite 5+ отключаем проверку хостов через preview
+  preview: {
+    host: true,
+    port: 3000,
+    strictPort: false
   },
   build: {
     outDir: 'dist',
