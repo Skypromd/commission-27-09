@@ -159,8 +159,8 @@ class AuthenticationTester:
         
         # Test 4: Weak password
         weak_password_data = test_user_data.copy()
-        weak_password_data['username'] = 'testuser789'
-        weak_password_data['email'] = 'testuser789@example.com'
+        weak_password_data['username'] = f'testuser{timestamp}789'
+        weak_password_data['email'] = f'testuser{timestamp}789@example.com'
         weak_password_data['password'] = '123'
         
         try:
