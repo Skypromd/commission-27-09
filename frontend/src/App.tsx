@@ -67,10 +67,14 @@ function App() {
   };
 
   const handleLogin = async (credentials) => {
+    console.log('🔄 Starting login with credentials:', credentials);
+    console.log('🔗 API_BASE:', API_BASE);
     setLoginLoading(true);
     
     try {
-      const response = await fetch(`${API_BASE}/users/auth/login/`, {
+      const url = `${API_BASE}/users/auth/login/`;
+      console.log('📡 Making request to:', url);
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
