@@ -34,7 +34,7 @@ export const authApiSlice = api.injectEndpoints({
     }),
     logout: builder.mutation({
       query: () => ({
-        url: 'auth/token/logout/', // URL для выхода в djoser
+        url: 'users/auth/logout/', // URL для выхода в custom backend
         method: 'POST',
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
