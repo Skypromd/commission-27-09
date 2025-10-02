@@ -8,6 +8,14 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
+    allowedHosts: [
+      'rushelp.preview.emergentagent.com',
+      '.preview.emergentagent.com',
+      'localhost',
+      '127.0.0.1'
+    ],
+    // Разрешаем все хосты для Preview URLs
+    disableHostCheck: true
   },
   build: {
     outDir: 'dist',
