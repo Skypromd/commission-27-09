@@ -484,25 +484,89 @@ function App() {
         </div>
       </div>
 
-      {/* Modules */}
+      {/* Interactive Modules */}
       <div className="md:col-span-2 lg:col-span-3 bg-white overflow-hidden shadow rounded-lg">
         <div className="p-5">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Commission Tracker Modules</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">🚀 Commission Tracker Modules</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { name: 'Users', icon: '👤', desc: 'User Management' },
-              { name: 'Advisers', icon: '🤵', desc: 'Adviser Profiles' },
-              { name: 'Clients', icon: '👥', desc: 'Client Database' },
-              { name: 'Products', icon: '🏷️', desc: 'Product Catalog' },
-              { name: 'Policies', icon: '📋', desc: 'Policy Management' },
-              { name: 'Commissions', icon: '💰', desc: 'Commission Tracking' },
-              { name: 'Reports', icon: '📊', desc: 'Analytics & Reports' },
-              { name: 'Settings', icon: '⚙️', desc: 'System Configuration' }
+              { 
+                name: 'Deals', 
+                key: 'deals',
+                icon: '💼', 
+                desc: 'Sales Pipeline',
+                color: 'hover:bg-blue-50 hover:border-blue-200',
+                stats: data.deals?.pipeline_overview ? `${data.deals.pipeline_overview.total_deals} deals` : 'Loading...'
+              },
+              { 
+                name: 'Advisers', 
+                key: 'advisers',
+                icon: '🤵', 
+                desc: 'Team Management',
+                color: 'hover:bg-green-50 hover:border-green-200',
+                stats: data.advisers ? `${data.advisers.count || data.advisers.results?.length || 0} advisers` : 'Loading...'
+              },
+              { 
+                name: 'Clients', 
+                key: 'clients',
+                icon: '👥', 
+                desc: 'Client Portfolio',
+                color: 'hover:bg-purple-50 hover:border-purple-200',
+                stats: data.clients ? `${data.clients.count || data.clients.results?.length || 0} clients` : 'Loading...'
+              },
+              { 
+                name: 'Products', 
+                key: 'products',
+                icon: '🏷️', 
+                desc: 'Product Catalog',
+                color: 'hover:bg-orange-50 hover:border-orange-200',
+                stats: data.products ? `${data.products.count || data.products.results?.length || 0} products` : 'Loading...'
+              },
+              { 
+                name: 'Policies', 
+                key: 'policies',
+                icon: '📋', 
+                desc: 'Policy Management',
+                color: 'hover:bg-indigo-50 hover:border-indigo-200',
+                stats: '127 active policies'
+              },
+              { 
+                name: 'Commissions', 
+                key: 'commissions',
+                icon: '💰', 
+                desc: 'Commission Tracking',
+                color: 'hover:bg-yellow-50 hover:border-yellow-200',
+                stats: '$45.2k this month'
+              },
+              { 
+                name: 'Reports', 
+                key: 'reports',
+                icon: '📊', 
+                desc: 'Analytics & Reports',
+                color: 'hover:bg-red-50 hover:border-red-200',
+                stats: '15 reports available'
+              },
+              { 
+                name: 'Settings', 
+                key: 'settings',
+                icon: '⚙️', 
+                desc: 'System Configuration',
+                color: 'hover:bg-gray-50 hover:border-gray-300',
+                stats: 'System ready'
+              }
             ].map((module) => (
-              <div key={module.name} className="text-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+              <div 
+                key={module.name} 
+                onClick={() => ['deals', 'advisers', 'clients', 'products'].includes(module.key) ? loadModuleData(module.key) : null}
+                className={`text-center p-4 border border-gray-200 rounded-lg transition-all cursor-pointer ${module.color} ${loading && selectedModule === module.key ? 'animate-pulse' : ''}`}
+              >
                 <div className="text-2xl mb-2">{module.icon}</div>
                 <div className="font-medium text-gray-900">{module.name}</div>
-                <div className="text-xs text-gray-500">{module.desc}</div>
+                <div className="text-xs text-gray-500 mb-1">{module.desc}</div>
+                <div className="text-xs font-medium text-blue-600">{module.stats}</div>
+                {['deals', 'advisers', 'clients', 'products'].includes(module.key) && (
+                  <div className="mt-2 text-xs text-gray-400">Click to explore →</div>
+                )}
               </div>
             ))}
           </div>
