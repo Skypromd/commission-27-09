@@ -122,22 +122,7 @@ class Migration(migrations.Migration):
         migrations.AddField(model_name='mortgagecase', name='product_code', field=models.CharField(blank=True, max_length=100)),
         migrations.AddField(model_name='mortgagecase', name='term_months', field=models.PositiveIntegerField(blank=True, null=True)),
         migrations.AddField(model_name='mortgagecase', name='upsell_opportunity', field=models.BooleanField(default=False)),
-        migrations.AlterField(model_name='mortgagecase', name='status', field=models.CharField(choices=[('new', 'Новый'), ('in_progress', 'В процессе'), ('approved', 'Одобрен'), ('rejected', 'Отклонен'), ('completed', 'Завершен'), ('withdrawn', 'Отозван'), ('failed', 'Ошибка'), ('pending', 'В ожидании'), ('cancelled', 'Отменен'), ('on_hold', 'Приостановлен'), ('awaiting_documents', 'Ожидание документов'), ('documents_received', 'Документы получены'), ('underwriting', 'На рассмотрении'), ('offer_made', 'Предложение ��делано'), ('offer_accepted', 'Предложение принято'), ('offer_rejected', 'Предложение отклонено'), ('completion_arranged', 'Завершение запланировано'), ('funds_disbursed', 'Средства выплачены'), ('mortgage_registered', 'Ипотека зарегистрирована'), ('refinance_arranged', 'Рефинансирование запланировано'), ('early_repayment', 'Досрочное погашение'), ('default', 'По умолчанию'), ('denied', 'Отказан'), ('closed', 'Закрыт')], default='new', max_length=30, verbose_name='Статус')),
-        migrations.AlterField(
-            model_name="mortgagecase",
-            name="product_type",
-            field=models.CharField(
-                choices=[
-                    ("residential", "Жилая недвижимость"),
-                    ("buy_to_let", "Покупка для сдачи в аренду"),
-                    ("remortgage", "Рефинансирование"),
-                    ("other", "Другое"),
-                ],
-                default="residential",
-                max_length=20,
-                verbose_name="Тип продукта",
-            ),
-        ),
+        migrations.AlterField(model_name='mortgagecase', name='status', field=models.CharField(choices=[('new', 'Новый'), ('in_progress', 'В процессе'), ('approved', 'Одобрен'), ('rejected', 'Отклонен'), ('completed', 'Завершен'), ('withdrawn', 'Отозван'), ('failed', 'Ошибка'), ('pending', 'В ожидании'), ('cancelled', 'Отменен'), ('on_hold', 'Приостановлен'), ('awaiting_documents', 'Ожидание документов'), ('documents_received', 'Документы получены'), ('underwriting', 'На рассмотрении'), ('offer_made', 'Предложение сделано'), ('offer_accepted', 'Предложение принято'), ('offer_rejected', 'Предложение отклонено'), ('completion_arranged', 'Завершение запланировано'), ('funds_disbursed', 'Средства выплачены'), ('mortgage_registered', 'Ипотека зарегистрирована'), ('refinance_arranged', 'Рефинансирование запланировано'), ('early_repayment', 'Досрочное погашение'), ('default', 'По умолчанию'), ('denied', 'Отказан'), ('closed', 'Закрыт')], default='new', max_length=30, verbose_name='Статус')),
 
         migrations.AddField(model_name='commission', name='adviser_fee_amount', field=models.DecimalField(blank=True, decimal_places=2, max_digits=10, null=True)),
         migrations.AddField(model_name='commission', name='adviser_fee_percentage', field=models.DecimalField(blank=True, decimal_places=2, max_digits=5, null=True)),

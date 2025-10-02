@@ -26,17 +26,21 @@ def create_commission_for_policy(policy: Policy):
     gross_commission_placeholder = policy.annual_premium_value * gross_rate
     net_commission_placeholder = gross_commission_placeholder * net_rate
 
+    adviser = policy.adviser
+    # Calculate adviser_fee_amount based on net_commission and adviser's percentage
+    adviser_fee_amount_calculated = net_commission_placeholder * (adviser.default_commission_percentage / Decimal(100))
+
     # 4. Create the main Commission object
     commission = Commission.objects.create(
         policy=policy,
         gross_commission=gross_commission_placeholder,
         net_commission=net_commission_placeholder,
-        adviser_fee_percentage=policy.adviser.default_commission_percentage,
+        adviser_fee_percentage=adviser.default_commission_percentage,
+        adviser_fee_amount=adviser_fee_amount_calculated, # Добавляем вычисленную сумму
         date_received=policy.updated_at.date()
     )
 
     # 5. Handle Override Commission creation
-    adviser = policy.adviser
     if adviser.parent_adviser and adviser.parent_adviser.active_flag:
         manager = adviser.parent_adviser
         override_amount = commission.net_commission * (manager.default_override_percentage / Decimal(100))

@@ -4,7 +4,10 @@ import environ
 # Initialize django-environ
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    # Добавляем значения по умолчанию для Celery
+    CELERY_BROKER_URL=(str, 'redis://localhost:6379/0'), # Пример: Redis на localhost
+    CELERY_RESULT_BACKEND=(str, 'redis://localhost:6379/0'), # Пример: Redis на localhost
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,23 +42,23 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_spectacular",
     # Your Project Apps
-    "apps.users",
-    "apps.advisers",
-    "apps.clients",
-    "apps.products",
-    "apps.policies",
-    "apps.deals",
-    "apps.commission",
-    "apps.insurances",
-    "apps.mortgage",
-    "apps.sales",
-    "apps.reports",
-    "apps.notifications",
-    "apps.audit",
-    "apps.tasks",
-    "apps.bi_analytics",
-    "apps.api_keys",
-    "apps.core",  # Your core app with shared logic
+    "backend.apps.users",
+    "backend.apps.advisers",
+    "backend.apps.clients",
+    "backend.apps.products",
+    "backend.apps.policies",
+    "backend.apps.deals",
+    "backend.apps.commission",
+    "backend.apps.insurances",
+    "backend.apps.mortgage",
+    "backend.apps.sales",
+    "backend.apps.reports",
+    "backend.apps.notifications",
+    "backend.apps.audit",
+    "backend.apps.tasks",
+    "backend.apps.bi_analytics",
+    "backend.apps.api_keys",
+    "backend.apps.core",  # Your core app with shared logic
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,22 @@
+{
+    "Profile Page": "Profile Page",
+    "Profile": "Profile",
+    "Edit": "Edit",
+    "Cancel": "Cancel",
+    "Save": "Save",
+    "An error occurred while loading the profile": "An error occurred while loading the profile",
+    "Try refreshing the page": "Try refreshing the page",
+    "Your name": "Your name",
+    "Your last name": "Your last name",
+    "Your age": "Your age",
+    "Your city": "Your city",
+    "Your username": "Your username",
+    "Your avatar link": "Your avatar link",
+    "Specify currency": "Specify currency",
+    "Specify country": "Specify country",
+    "Server error on save": "Server error on save",
+    "Incorrect country": "Incorrect country",
+    "Data not specified": "Data not specified",
+    "First and last name are required": "First and last name are required",
+    "Incorrect age": "Incorrect age"
+}
