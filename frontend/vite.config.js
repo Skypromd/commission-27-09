@@ -16,9 +16,7 @@ export default defineConfig({
       '.preview.emergentagent.com'
     ],
     strictPort: false,
-    hmr: {
-      port: 3000
-    },
+    hmr: true,
     cors: true,
     proxy: {
       '/api': {
