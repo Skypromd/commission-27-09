@@ -41,7 +41,7 @@ function App() {
     if (savedAuth && savedUser && savedToken) {
       try {
         // Проверяем действительность токена через API
-        const response = await fetch(`${API_BASE}/users/me/`, {
+        const response = await fetch(`${API_BASE}/users/users/me/`, {
           headers: {
             'Authorization': `Token ${savedToken}`,
             'Content-Type': 'application/json'
