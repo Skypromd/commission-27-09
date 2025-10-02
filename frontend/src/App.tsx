@@ -17,10 +17,8 @@ function App() {
   const [twoFactorCode, setTwoFactorCode] = useState('');
   const [pendingUser, setPendingUser] = useState(null);
   
-  // Определяем backend URL
-  const API_BASE = window.location.hostname.includes('preview.emergentagent.com') 
-    ? `https://${window.location.hostname.replace('3001', '8001')}/api`
-    : 'http://localhost:8001/api';
+  // Определяем backend URL - используем относительный путь для работы через прокси
+  const API_BASE = '/api';
 
   useEffect(() => {
     // Проверяем авторизацию при загрузке
