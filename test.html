@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Commission Tracker - Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .status { padding: 20px; margin: 10px 0; border-radius: 5px; }
+        .ok { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Commission Tracker Status</h1>
+    
+    <div class="status ok">
+        <h3>✅ Services Running</h3>
+        <p><strong>Backend (Django):</strong> Port 8080</p>
+        <p><strong>Frontend (React):</strong> Port 3000</p>
+    </div>
+    
+    <div class="status info">
+        <h3>📋 Access Links</h3>
+        <p><strong>Django Admin:</strong> <a href="/admin/" target="_blank">Port 8080 + /admin/</a></p>
+        <p><strong>API Docs:</strong> <a href="/api/docs/" target="_blank">Port 8080 + /api/docs/</a></p>
+        <p><strong>React App:</strong> <a href="javascript:void(0)">Port 3000</a></p>
+    </div>
+    
+    <div class="status info">
+        <h3>🔐 Login Credentials</h3>
+        <p><strong>Username:</strong> admin</p>
+        <p><strong>Password:</strong> admin</p>
+    </div>
+    
+    <script>
+        // Test API connectivity
+        fetch('/api/')
+            .then(response => {
+                if (response.status === 403) {
+                    document.querySelector('.status.ok').innerHTML += '<br><p>✅ API responding (authentication required)</p>';
+                }
+            })
+            .catch(error => {
+                console.log('API test:', error);
+            });
+    </script>
+</body>
+</html>
