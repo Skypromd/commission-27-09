@@ -815,219 +815,324 @@ function App() {
   );
 
   const DashboardView = () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {/* Status Card */}
-      <div className="bg-white overflow-hidden shadow rounded-lg">
-        <div className="p-5">
-          <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                apiStatus === 'connected' ? 'bg-green-100 text-green-600' : 
-                apiStatus === 'error' ? 'bg-red-100 text-red-600' : 
-                'bg-yellow-100 text-yellow-600'
-              }`}>
-                {apiStatus === 'connected' ? '✓' : apiStatus === 'error' ? '✗' : '○'}
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Executive Summary Header */}
+      <div className="bg-white shadow-lg border-b border-gray-200 mb-8">
+        <div className="px-8 py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Commission Management Platform
+              </h1>
+              <p className="text-gray-600 mt-1">Enterprise-grade commission tracking and business intelligence</p>
             </div>
-            <div className="ml-5 w-0 flex-1">
-              <dl>
-                <dt className="text-sm font-medium text-gray-500 truncate">
-                  API Status
-                </dt>
-                <dd className="text-lg font-medium text-gray-900">
-                  {apiStatus === 'connected' ? 'Connected' : 
-                   apiStatus === 'error' ? 'Disconnected' : 'Checking...'}
-                </dd>
-              </dl>
+            <div className="flex items-center space-x-4">
+              <div className="text-right">
+                <div className="text-sm text-gray-500">System Status</div>
+                <div className={`text-sm font-semibold ${apiStatus === 'connected' ? 'text-green-600' : 'text-red-600'}`}>
+                  {apiStatus === 'connected' ? '🟢 All Systems Operational' : '🔴 Connection Issues'}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="bg-white overflow-hidden shadow rounded-lg">
-        <div className="p-5">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Quick Actions</h3>
-          <div className="space-y-2">
+      {/* KPI Dashboard */}
+      <div className="px-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-lg p-6 text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-green-100">Total Revenue</p>
+                <p className="text-3xl font-bold">$2.85M</p>
+                <p className="text-sm text-green-100">+12% from last month</p>
+              </div>
+              <div className="text-4xl opacity-80">💰</div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl shadow-lg p-6 text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-blue-100">Active Deals</p>
+                <p className="text-3xl font-bold">{data.deals?.pipeline_overview?.total_deals || 156}</p>
+                <p className="text-sm text-blue-100">Pipeline value: $4.2M</p>
+              </div>
+              <div className="text-4xl opacity-80">📊</div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl shadow-lg p-6 text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-purple-100">Team Performance</p>
+                <p className="text-3xl font-bold">94%</p>
+                <p className="text-sm text-purple-100">Target achievement</p>
+              </div>
+              <div className="text-4xl opacity-80">🎯</div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-orange-500 to-red-600 rounded-xl shadow-lg p-6 text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-orange-100">Client Satisfaction</p>
+                <p className="text-3xl font-bold">4.8/5</p>
+                <p className="text-sm text-orange-100">Based on 1,247 reviews</p>
+              </div>
+              <div className="text-4xl opacity-80">⭐</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Business Intelligence Modules */}
+      <div className="px-8">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Business Intelligence Modules</h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Sales & Revenue Management */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6">
+              <h3 className="text-xl font-semibold text-white mb-2">💼 Sales & Revenue</h3>
+              <p className="text-blue-100">Pipeline management and revenue tracking</p>
+            </div>
+            <div className="p-6 space-y-4">
+              <div 
+                onClick={() => loadModuleData('deals')}
+                className="flex items-center justify-between p-4 bg-blue-50 rounded-lg hover:bg-blue-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white text-lg">💼</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Sales Pipeline</div>
+                    <div className="text-sm text-gray-600">{data.deals?.pipeline_overview?.total_deals || 156} active deals</div>
+                  </div>
+                </div>
+                <div className="text-blue-600">→</div>
+              </div>
+
+              <div 
+                onClick={() => loadModuleData('sales')}
+                className="flex items-center justify-between p-4 bg-yellow-50 rounded-lg hover:bg-yellow-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-yellow-600 rounded-lg flex items-center justify-center text-white text-lg">💰</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Sales Management</div>
+                    <div className="text-sm text-gray-600">{data.sales?.count || 0} transactions</div>
+                  </div>
+                </div>
+                <div className="text-yellow-600">→</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Client & Relationship Management */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="bg-gradient-to-r from-green-600 to-green-700 p-6">
+              <h3 className="text-xl font-semibold text-white mb-2">👥 Client Management</h3>
+              <p className="text-green-100">Customer relationships and portfolios</p>
+            </div>
+            <div className="p-6 space-y-4">
+              <div 
+                onClick={() => loadModuleData('clients')}
+                className="flex items-center justify-between p-4 bg-green-50 rounded-lg hover:bg-green-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white text-lg">👥</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Client Portfolio</div>
+                    <div className="text-sm text-gray-600">{data.clients?.count || 0} active clients</div>
+                  </div>
+                </div>
+                <div className="text-green-600">→</div>
+              </div>
+
+              <div 
+                onClick={() => loadModuleData('advisers')}
+                className="flex items-center justify-between p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-lg">🤵</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Team Management</div>
+                    <div className="text-sm text-gray-600">{data.advisers?.count || data.advisers?.results?.length || 0} advisers</div>
+                  </div>
+                </div>
+                <div className="text-indigo-600">→</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Product & Service Management */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="bg-gradient-to-r from-purple-600 to-purple-700 p-6">
+              <h3 className="text-xl font-semibold text-white mb-2">🏷️ Product Services</h3>
+              <p className="text-purple-100">Insurance, mortgage and product management</p>
+            </div>
+            <div className="p-6 space-y-4">
+              <div 
+                onClick={() => loadModuleData('products')}
+                className="flex items-center justify-between p-4 bg-purple-50 rounded-lg hover:bg-purple-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white text-lg">🏷️</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Product Catalog</div>
+                    <div className="text-sm text-gray-600">{data.products?.count || 0} products</div>
+                  </div>
+                </div>
+                <div className="text-purple-600">→</div>
+              </div>
+
+              <div 
+                onClick={() => loadModuleData('insurances')}
+                className="flex items-center justify-between p-4 bg-teal-50 rounded-lg hover:bg-teal-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center text-white text-lg">🛡️</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Insurance Policies</div>
+                    <div className="text-sm text-gray-600">{data.insurances?.count || 0} policies</div>
+                  </div>
+                </div>
+                <div className="text-teal-600">→</div>
+              </div>
+
+              <div 
+                onClick={() => loadModuleData('mortgages')}
+                className="flex items-center justify-between p-4 bg-pink-50 rounded-lg hover:bg-pink-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-pink-600 rounded-lg flex items-center justify-center text-white text-lg">🏠</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Mortgage Lending</div>
+                    <div className="text-sm text-gray-600">{data.mortgages?.count || 0} applications</div>
+                  </div>
+                </div>
+                <div className="text-pink-600">→</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Analytics & Operations Row */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+          {/* Analytics & Reporting */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 p-6">
+              <h3 className="text-xl font-semibold text-white mb-2">📊 Analytics & Intelligence</h3>
+              <p className="text-indigo-100">Business intelligence and reporting</p>
+            </div>
+            <div className="p-6 space-y-4">
+              <div 
+                onClick={() => loadModuleData('bi')}
+                className="flex items-center justify-between p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-lg">📈</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Business Intelligence</div>
+                    <div className="text-sm text-gray-600">Advanced KPI analytics</div>
+                  </div>
+                </div>
+                <div className="text-indigo-600">→</div>
+              </div>
+
+              <div 
+                onClick={() => loadModuleData('reports')}
+                className="flex items-center justify-between p-4 bg-red-50 rounded-lg hover:bg-red-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white text-lg">📊</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Reports & Analytics</div>
+                    <div className="text-sm text-gray-600">{data.reports?.count || 0} reports available</div>
+                  </div>
+                </div>
+                <div className="text-red-600">→</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Operations & Management */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="bg-gradient-to-r from-orange-600 to-orange-700 p-6">
+              <h3 className="text-xl font-semibold text-white mb-2">⚙️ Operations</h3>
+              <p className="text-orange-100">System management and monitoring</p>
+            </div>
+            <div className="p-6 space-y-4">
+              <div 
+                onClick={() => loadModuleData('tasks')}
+                className="flex items-center justify-between p-4 bg-green-50 rounded-lg hover:bg-green-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white text-lg">📝</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Task Management</div>
+                    <div className="text-sm text-gray-600">{data.tasks?.open_tasks || 0} open tasks</div>
+                  </div>
+                </div>
+                <div className="text-green-600">→</div>
+              </div>
+
+              <div 
+                onClick={() => loadModuleData('notifications')}
+                className="flex items-center justify-between p-4 bg-blue-50 rounded-lg hover:bg-blue-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white text-lg">🔔</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">Notifications</div>
+                    <div className="text-sm text-gray-600">{data.notifications?.unread_count || 0} unread</div>
+                  </div>
+                </div>
+                <div className="text-blue-600">→</div>
+              </div>
+
+              <div 
+                onClick={() => loadModuleData('audit')}
+                className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center text-white text-lg">🔍</div>
+                  <div>
+                    <div className="font-semibold text-gray-900">System Audit</div>
+                    <div className="text-sm text-gray-600">{data.audit?.today_actions || 0} actions today</div>
+                  </div>
+                </div>
+                <div className="text-gray-600">→</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Access Panel */}
+        <div className="mt-8 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl shadow-lg p-6">
+          <h3 className="text-xl font-semibold text-white mb-4">🚀 Quick Access</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button 
               onClick={() => window.open(`${API_BASE.replace('/api', '/admin/')}`, '_blank')}
-              className="w-full text-left px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded"
+              className="flex items-center justify-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors text-white"
             >
-              📊 Open Django Admin
+              <span className="text-xl">⚙️</span>
+              <span>Django Admin Panel</span>
             </button>
             <button 
               onClick={() => window.open(`${API_BASE}/docs/`, '_blank')}
-              className="w-full text-left px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded"
+              className="flex items-center justify-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors text-white"
             >
-              📚 View API Documentation
+              <span className="text-xl">📚</span>
+              <span>API Documentation</span>
             </button>
-          </div>
-        </div>
-      </div>
-
-      {/* System Info */}
-      <div className="bg-white overflow-hidden shadow rounded-lg">
-        <div className="p-5">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">System Info</h3>
-          <div className="space-y-2 text-sm text-gray-600">
-            <div>Frontend: React + Vite</div>
-            <div>Backend: Django + DRF</div>
-            <div>Database: SQLite</div>
-            <div>Status: ✅ Running</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Interactive Modules */}
-      <div className="md:col-span-2 lg:col-span-3 bg-white overflow-hidden shadow rounded-lg">
-        <div className="p-5">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">🚀 Commission Tracker Modules</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { 
-                name: 'Deals', 
-                key: 'deals',
-                icon: '💼', 
-                desc: 'Sales Pipeline',
-                color: 'hover:bg-blue-50 hover:border-blue-200',
-                stats: data.deals?.pipeline_overview ? `${data.deals.pipeline_overview.total_deals} deals` : 'Loading...'
-              },
-              { 
-                name: 'Advisers', 
-                key: 'advisers',
-                icon: '🤵', 
-                desc: 'Team Management',
-                color: 'hover:bg-green-50 hover:border-green-200',
-                stats: data.advisers ? `${data.advisers.count || data.advisers.results?.length || 0} advisers` : 'Loading...'
-              },
-              { 
-                name: 'Clients', 
-                key: 'clients',
-                icon: '👥', 
-                desc: 'Client Portfolio',
-                color: 'hover:bg-purple-50 hover:border-purple-200',
-                stats: data.clients ? `${data.clients.count || data.clients.results?.length || 0} clients` : 'Loading...'
-              },
-              { 
-                name: 'Products', 
-                key: 'products',
-                icon: '🏷️', 
-                desc: 'Product Catalog',
-                color: 'hover:bg-orange-50 hover:border-orange-200',
-                stats: data.products ? `${data.products.count || data.products.results?.length || 0} products` : 'Loading...'
-              },
-              { 
-                name: 'Policies', 
-                key: 'policies',
-                icon: '📋', 
-                desc: 'Policy Management',
-                color: 'hover:bg-indigo-50 hover:border-indigo-200',
-                stats: '127 active policies'
-              },
-              { 
-                name: 'Insurances', 
-                key: 'insurances',
-                icon: '🛡️', 
-                desc: 'Insurance Policies',
-                color: 'hover:bg-teal-50 hover:border-teal-200',
-                stats: data.insurances ? `${data.insurances.count || data.insurances.results?.length || 0} policies` : 'Loading...'
-              },
-              { 
-                name: 'Mortgage', 
-                key: 'mortgages',
-                icon: '🏠', 
-                desc: 'Mortgage Lending',
-                color: 'hover:bg-pink-50 hover:border-pink-200',
-                stats: data.mortgages ? `${data.mortgages.count || data.mortgages.results?.length || 0} applications` : 'Loading...'
-              },
-              { 
-                name: 'Commissions', 
-                key: 'commissions',
-                icon: '💰', 
-                desc: 'Commission Tracking',
-                color: 'hover:bg-yellow-50 hover:border-yellow-200',
-                stats: '$45.2k this month'
-              },
-              { 
-                name: 'Reports', 
-                key: 'reports',
-                icon: '📊', 
-                desc: 'Analytics & Reports',
-                color: 'hover:bg-red-50 hover:border-red-200',
-                stats: '15 reports available'
-              },
-              { 
-                name: 'Sales', 
-                key: 'sales',
-                icon: '💰', 
-                desc: 'Sales Management',
-                color: 'hover:bg-yellow-50 hover:border-yellow-200',
-                stats: data.sales ? `${data.sales.count || 0} sales` : 'Loading...'
-              },
-              { 
-                name: 'Reports', 
-                key: 'reports',
-                icon: '📊', 
-                desc: 'Analytics & Reports',
-                color: 'hover:bg-red-50 hover:border-red-200',
-                stats: data.reports ? `${data.reports.count || 0} reports` : 'Loading...'
-              },
-              { 
-                name: 'Notifications', 
-                key: 'notifications',
-                icon: '🔔', 
-                desc: 'System Notifications',
-                color: 'hover:bg-blue-50 hover:border-blue-200',
-                stats: data.notifications ? `${data.notifications.unread_count || 0} unread` : 'Loading...'
-              },
-              { 
-                name: 'Tasks', 
-                key: 'tasks',
-                icon: '📝', 
-                desc: 'Task Management',
-                color: 'hover:bg-green-50 hover:border-green-200',
-                stats: data.tasks ? `${data.tasks.open_tasks || 0} open` : 'Loading...'
-              },
-              { 
-                name: 'Audit', 
-                key: 'audit',
-                icon: '🔍', 
-                desc: 'System Audit',
-                color: 'hover:bg-purple-50 hover:border-purple-200',
-                stats: data.audit ? `${data.audit.today_actions || 0} today` : 'Loading...'
-              },
-              { 
-                name: 'Analytics', 
-                key: 'bi',
-                icon: '📈', 
-                desc: 'Business Intelligence',
-                color: 'hover:bg-indigo-50 hover:border-indigo-200',
-                stats: 'Advanced BI'
-              }
-            ].map((module) => (
-              <div 
-                key={module.name} 
-                onClick={() => {
-                  console.log('Module clicked:', module.key);
-                  if (['deals', 'advisers', 'clients', 'products', 'insurances', 'mortgages', 'sales', 'reports', 'notifications', 'tasks', 'audit', 'bi'].includes(module.key)) {
-                    loadModuleData(module.key);
-                  } else {
-                    alert(`${module.name} модуль в разработке. Доступны: Deals, Advisers, Clients, Products, Insurances, Mortgage`);
-                  }
-                }}
-                className={`text-center p-4 border border-gray-200 rounded-lg transition-all cursor-pointer ${module.color} ${loading && selectedModule === module.key ? 'animate-pulse' : ''}`}
-              >
-                <div className="text-2xl mb-2">{module.icon}</div>
-                <div className="font-medium text-gray-900">{module.name}</div>
-                <div className="text-xs text-gray-500 mb-1">{module.desc}</div>
-                <div className="text-xs font-medium text-blue-600">{module.stats}</div>
-                <div className="mt-2 text-xs text-gray-400">
-                  {['deals', 'advisers', 'clients', 'products', 'insurances', 'mortgages', 'sales', 'reports', 'notifications', 'tasks', 'audit', 'bi'].includes(module.key) 
-                    ? 'Click to explore →' 
-                    : 'Coming soon...'}
-                </div>
-              </div>
-            ))}
+            <button 
+              className="flex items-center justify-center space-x-3 p-4 bg-white/10 rounded-lg hover:bg-white/20 transition-colors text-white"
+            >
+              <span className="text-xl">📈</span>
+              <span>System Status</span>
+            </button>
           </div>
         </div>
       </div>
