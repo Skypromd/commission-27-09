@@ -282,7 +282,7 @@ class AuthenticationTester:
         
         # Test 3: Invalid credentials
         invalid_login_data = {
-            "username": "testuser123",
+            "username": f"testuser{timestamp}",
             "password": "wrongpassword"
         }
         
