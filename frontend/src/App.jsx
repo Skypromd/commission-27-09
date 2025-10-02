@@ -7,6 +7,11 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [selectedModule, setSelectedModule] = useState(null);
   
+  // Система авторизации
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loginLoading, setLoginLoading] = useState(false);
+  
   // Определяем backend URL
   const API_BASE = window.location.hostname.includes('preview.emergentagent.com') 
     ? `https://${window.location.hostname.replace('3001', '8080')}/api`
