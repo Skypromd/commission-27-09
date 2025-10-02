@@ -51,9 +51,8 @@ INSTALLED_APPS = [
     "apps.policies",
     "apps.deals",
     "apps.commission",
-    # Проблемные приложения временно отключены
-    # "apps.insurances",  
-    # "apps.mortgage",
+    "apps.insurances",  # Включено для ипотеки
+    "apps.mortgage",    # Включено для страхования
     # "apps.sales",
     # "apps.reports", 
     # "apps.notifications",
