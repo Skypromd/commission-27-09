@@ -109,7 +109,28 @@ function App() {
     setSelectedModule(module);
     
     try {
-      const url = `${API_BASE}/${module}/${module}/`;
+      // Правильные URL для каждого модуля
+      const moduleUrls = {
+        'deals': `${API_BASE}/deals/deals/`,
+        'advisers': `${API_BASE}/advisers/advisers/`,
+        'clients': `${API_BASE}/clients/clients/`,
+        'products': `${API_BASE}/products/products/`,
+        'insurances': `${API_BASE}/insurances/insurances/`,
+        'mortgages': `${API_BASE}/mortgage/mortgages/`,
+        'sales': `${API_BASE}/sales/sales/`,
+        'reports': `${API_BASE}/reports/reports/`,
+        'notifications': `${API_BASE}/notifications/notifications/`,
+        'tasks': `${API_BASE}/tasks/tasks/`,
+        'audit': `${API_BASE}/audit/audit/`,
+        'bi': `${API_BASE}/bi/analytics/`,
+      };
+
+      const url = moduleUrls[module];
+      if (!url) {
+        alert(`Модуль ${module} еще не настроен`);
+        return;
+      }
+
       console.log('Fetching URL:', url);
       
       const response = await fetch(url);
