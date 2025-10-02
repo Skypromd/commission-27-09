@@ -20,9 +20,6 @@ class PolicyFilter(django_filters.FilterSet):
             'status': ['exact'],
             'insurance_type': ['exact'],
             'adviser': ['exact'],
-            'client_name': ['icontains'],
-            'insurer_name': ['icontains'],
             'start_date': ['exact', 'gte', 'lte'],
             'renewal_date': ['exact', 'gte', 'lte'],
-            'commission_payment_status': ['exact'],
         }
