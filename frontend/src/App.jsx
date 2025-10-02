@@ -64,6 +64,12 @@ function App() {
       if (productsRes && productsRes.ok) {
         newData.products = await productsRes.json();
       }
+      if (insurancesRes && insurancesRes.ok) {
+        newData.insurances = await insurancesRes.json();
+      }
+      if (mortgagesRes && mortgagesRes.ok) {
+        newData.mortgages = await mortgagesRes.json();
+      }
 
       setData(newData);
     } catch (error) {
