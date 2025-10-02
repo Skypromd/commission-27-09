@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     Policy, Commission, Insurer, InsuranceType,
-    Retention, Clawback, Bonus, Override, ReferralFee, IngestionTask
+    Retention, Clawback, Bonus, Override, ReferralFee, InsuranceIngestionTask
 )
 
 @admin.register(Policy)
