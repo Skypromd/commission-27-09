@@ -1210,6 +1210,90 @@ function App() {
     </div>
   );
 
+  // Компонент страницы входа
+  const LoginPage = () => {
+    const [credentials, setCredentials] = useState({ username: '', password: '' });
+    const [error, setError] = useState('');
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setError('');
+      
+      const result = await handleLogin(credentials);
+      if (!result.success) {
+        setError(result.error);
+      }
+    };
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 flex items-center justify-center">
+        <div className="max-w-md w-full space-y-8 p-8">
+          <div className="bg-white rounded-2xl shadow-2xl p-8">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Commission Tracker
+              </h1>
+              <p className="text-gray-600 mt-2">Enterprise Management Platform</p>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                <input
+                  type="text"
+                  value={credentials.username}
+                  onChange={(e) => setCredentials({...credentials, username: e.target.value})}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter your username"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <input
+                  type="password"
+                  value={credentials.password}
+                  onChange={(e) => setCredentials({...credentials, password: e.target.value})}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+              
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+                  {error}
+                </div>
+              )}
+              
+              <button
+                type="submit"
+                disabled={loginLoading}
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 font-medium"
+              >
+                {loginLoading ? 'Signing In...' : 'Sign In'}
+              </button>
+            </form>
+            
+            <div className="mt-6 text-center">
+              <div className="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+                <strong>Demo Credentials:</strong><br/>
+                Username: admin<br/>
+                Password: admin
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Показываем страницу входа если не авторизован
+  if (!isAuthenticated) {
+    return <LoginPage />;
+  }
+
   return (
     <div className="commission-tracker min-h-screen bg-gray-50">
       {/* Modern Header integrated into Dashboard */}
