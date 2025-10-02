@@ -28,7 +28,7 @@ class DealViewSet(viewsets.ViewSet):
     """
     Advanced Deal Management ViewSet with comprehensive sales pipeline functionality.
     """
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Временно для демо
 
     @extend_schema(
         description="Get deals dashboard with pipeline analytics",
@@ -240,7 +240,7 @@ class PipelineViewSet(viewsets.ModelViewSet):
     """
     queryset = Pipeline.objects.prefetch_related('stages').all()
     serializer_class = PipelineSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Временно для демо
     search_fields = ['name']
     ordering = ['name']
 
@@ -258,5 +258,5 @@ class StageViewSet(viewsets.ModelViewSet):
     """
     queryset = Stage.objects.select_related('pipeline').all()
     serializer_class = StageSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # Временно для демо
     ordering = ['pipeline', 'order']
