@@ -76,7 +76,7 @@ MIDDLEWARE = [
 # --- CORS Settings ---
 # In production, use CORS_ALLOWED_ORIGINS from .env for security
 CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[])
-CORS_ALLOW_ALL_ORIGINS = False # Устанавливаем в False для безопасности
+CORS_ALLOW_ALL_ORIGINS = True # Allow all origins for development
 
 # --- Database Settings ---
 DATABASES = {
