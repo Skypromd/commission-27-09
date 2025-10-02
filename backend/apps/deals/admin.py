@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Deal, Pipeline, Stage
+from .models import Pipeline, Stage
 
 class StageInline(admin.TabularInline):
     model = Stage
@@ -8,12 +8,11 @@ class StageInline(admin.TabularInline):
 
 @admin.register(Pipeline)
 class PipelineAdmin(admin.ModelAdmin):
-    list_display = ('name', 'product_type')
+    list_display = ('name', 'category')
     inlines = [StageInline]
 
-@admin.register(Deal)
-class DealAdmin(admin.ModelAdmin):
-    list_display = ('id', 'product', 'client', 'agent', 'amount', 'stage', 'deal_date')
-    list_filter = ('stage', 'agent', 'deal_date')
-    search_fields = ('client__first_name', 'client__last_name', 'product__name')
-    readonly_fields = ('deal_date',)
+@admin.register(Stage)
+class StageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'pipeline', 'order', 'is_closing_stage')
+    list_filter = ('pipeline', 'is_closing_stage')
+    ordering = ('pipeline', 'order')
