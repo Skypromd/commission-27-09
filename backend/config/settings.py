@@ -42,23 +42,24 @@ INSTALLED_APPS = [
     "rest_framework_api_key", 
     "corsheaders",
     "drf_spectacular",
-    # Your Project Apps
+    # Your Project Apps  
     "apps.core",  # Your core app with shared logic
     "apps.users",
-    "apps.advisers", 
-    "apps.clients",
+    "apps.advisers",
+    "apps.clients", 
     "apps.products",
     "apps.policies",
     "apps.deals",
     "apps.commission",
-    "apps.insurances",
-    "apps.mortgage",
-    "apps.sales",
-    "apps.reports",
-    "apps.notifications",
-    "apps.audit",
-    "apps.tasks",
-    "apps.bi_analytics",
+    # Проблемные приложения временно отключены
+    # "apps.insurances",  
+    # "apps.mortgage",
+    # "apps.sales",
+    # "apps.reports", 
+    # "apps.notifications",
+    # "apps.audit",
+    # "apps.tasks",
+    # "apps.bi_analytics",
 ]
 
 MIDDLEWARE = [
