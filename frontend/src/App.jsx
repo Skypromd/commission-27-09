@@ -34,14 +34,37 @@ function App() {
     }
   }, [isAuthenticated]);
 
-  const checkAuthStatus = () => {
+  const checkAuthStatus = async () => {
     // Проверяем сохраненную сессию
     const savedAuth = localStorage.getItem('commissionTracker_auth');
     const savedUser = localStorage.getItem('commissionTracker_user');
+    const savedToken = localStorage.getItem('commissionTracker_token');
     
-    if (savedAuth && savedUser) {
-      setIsAuthenticated(true);
-      setUser(JSON.parse(savedUser));
+    if (savedAuth && savedUser && savedToken) {
+      try {
+        // Проверяем действительность токена через API
+        const response = await fetch(`${API_BASE}/users/users/me/`, {
+          headers: {
+            'Authorization': `Token ${savedToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          setIsAuthenticated(true);
+          setUser(JSON.parse(savedUser));
+        } else {
+          // Токен недействителен, очищаем данные
+          localStorage.removeItem('commissionTracker_auth');
+          localStorage.removeItem('commissionTracker_user');
+          localStorage.removeItem('commissionTracker_token');
+        }
+      } catch (error) {
+        console.error('Auth check error:', error);
+        // В случае ошибки сети, используем локальные данные
+        setIsAuthenticated(true);
+        setUser(JSON.parse(savedUser));
+      }
     }
   };
 
