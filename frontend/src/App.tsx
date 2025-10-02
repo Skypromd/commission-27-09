@@ -85,7 +85,9 @@ function App() {
         })
       });
 
+      console.log('📥 Response status:', response.status);
       const data = await response.json();
+      console.log('📄 Response data:', data);
       
       if (response.ok && data.success) {
         const userData = {
@@ -145,7 +147,9 @@ function App() {
         })
       });
 
+      console.log('📥 Response status:', response.status);
       const data = await response.json();
+      console.log('📄 Response data:', data);
       
       if (response.ok && data.success) {
         const newUser = {
