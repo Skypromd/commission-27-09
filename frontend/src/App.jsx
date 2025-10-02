@@ -1022,7 +1022,7 @@ function App() {
                 <div className="text-xs text-gray-500 mb-1">{module.desc}</div>
                 <div className="text-xs font-medium text-blue-600">{module.stats}</div>
                 <div className="mt-2 text-xs text-gray-400">
-                  {['deals', 'advisers', 'clients', 'products', 'insurances', 'mortgages'].includes(module.key) 
+                  {['deals', 'advisers', 'clients', 'products', 'insurances', 'mortgages', 'sales', 'reports', 'notifications', 'tasks', 'audit', 'bi'].includes(module.key) 
                     ? 'Click to explore →' 
                     : 'Coming soon...'}
                 </div>
