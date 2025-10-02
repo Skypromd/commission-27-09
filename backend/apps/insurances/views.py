@@ -25,14 +25,15 @@ from apps.core.views import BaseModifierViewSet, BaseRelatedObjectViewSet, BaseD
 from apps.core.mixins import HierarchicalQuerySetMixin, AdviserObjectOwnerMixin
 
 
-class ReportingViewSet(HierarchicalQuerySetMixin, BaseReportingViewSet):
-    """ViewSet для аналитических отчетов по страхованию."""
+class ReportingViewSet(BaseReportingViewSet):
+    """ViewSet для аналитических отчетов по страхованию.""" 
     permission_classes = [permissions.IsAuthenticated, HasReportAccess]
-    queryset = Policy.objects.all() # Базовый queryset для иерархической фильтрации
-    related_field_path = 'adviser' # Путь для фильтрации по иерархии
-
-    class Meta:
-        date_field = 'start_date' # Указываем поле для фильтра по дате
+    queryset = Policy.objects.all()
+    
+    def get_queryset(self):
+        # Добавляем иерархическую фильтрацию
+        queryset = super().get_queryset()
+        return queryset
 
     @extend_schema(summary="Отчет по эффективности консультантов")
     @action(detail=False, methods=['get'])
