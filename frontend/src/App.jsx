@@ -204,6 +204,14 @@ function App() {
         {module === 'advisers' && <AdvisersModule data={config.metrics} />}
         {module === 'clients' && <ClientsModule data={config.metrics} />}
         {module === 'products' && <ProductsModule data={config.metrics} />}
+        {module === 'insurances' && <InsurancesModule data={config.metrics} />}
+        {module === 'mortgages' && <MortgagesModule data={config.metrics} />}
+        {module === 'sales' && <SalesModule data={config.metrics} />}
+        {module === 'reports' && <ReportsModule data={config.metrics} />}
+        {module === 'notifications' && <NotificationsModule data={config.metrics} />}
+        {module === 'tasks' && <TasksModule data={config.metrics} />}
+        {module === 'audit' && <AuditModule data={config.metrics} />}
+        {module === 'bi' && <BiAnalyticsModule data={config.metrics} />}
       </div>
     );
   };
