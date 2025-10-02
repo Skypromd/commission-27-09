@@ -54,3 +54,105 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data)
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def register_user(request):
+    """
+    API endpoint для регистрации нового пользователя.
+    """
+    serializer = UserRegistrationSerializer(data=request.data)
+    if serializer.is_valid():
+        # Создаем пользователя
+        user = User.objects.create(
+            username=serializer.validated_data['username'],
+            email=serializer.validated_data['email'],
+            first_name=serializer.validated_data.get('first_name', ''),
+            last_name=serializer.validated_data.get('last_name', ''),
+            password=make_password(serializer.validated_data['password'])
+        )
+        
+        # Создаем токен
+        token, created = Token.objects.get_or_create(user=user)
+        
+        return Response({
+            'success': True,
+            'message': 'User registered successfully',
+            'user': {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'role': user.role
+            },
+            'token': token.key,
+            'requires_2fa': False  # For now, we'll implement 2FA later
+        }, status=status.HTTP_201_CREATED)
+    
+    return Response({
+        'success': False,
+        'errors': serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def login_user(request):
+    """
+    API endpoint для входа пользователя.
+    """
+    serializer = UserLoginSerializer(data=request.data)
+    if serializer.is_valid():
+        username = serializer.validated_data['username']
+        password = serializer.validated_data['password']
+        
+        user = authenticate(username=username, password=password)
+        if user is not None and user.is_active:
+            # Получаем или создаем токен
+            token, created = Token.objects.get_or_create(user=user)
+            
+            return Response({
+                'success': True,
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'email': user.email,
+                    'first_name': user.first_name,
+                    'last_name': user.last_name,
+                    'role': user.role
+                },
+                'token': token.key,
+                'requires_2fa': False  # For now
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({
+                'success': False,
+                'error': 'Invalid credentials'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+    
+    return Response({
+        'success': False,
+        'errors': serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def logout_user(request):
+    """
+    API endpoint для выхода пользователя.
+    """
+    try:
+        # Удаляем токен пользователя
+        request.user.auth_token.delete()
+        return Response({
+            'success': True,
+            'message': 'Successfully logged out'
+        }, status=status.HTTP_200_OK)
+    except:
+        return Response({
+            'success': False,
+            'error': 'Error logging out'
+        }, status=status.HTTP_400_BAD_REQUEST)
