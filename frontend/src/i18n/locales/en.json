@@ -1,0 +1,54 @@
+{
+  "clients": {
+    "title": "Client Management",
+    "totalClients": "Total Clients",
+    "newThisMonth": "New This Month",
+    "activeClients": "Active Clients",
+    "clientDetails": "Client Details",
+    "addClient": "Add Client",
+    "editClient": "Edit Client",
+    "deleteClient": "Delete Client"
+  },
+  "commissions": {
+    "title": "Commission Management",
+    "totalCommissions": "Total Commissions",
+    "pendingCommissions": "Pending Commissions",
+    "paidCommissions": "Paid Commissions",
+    "monthlyCommissions": "Monthly Commissions"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "statistics": "Statistics",
+    "recentActivity": "Recent Activity"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "commissions": "Commissions",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "reset": "Reset"
+  }
+}
+

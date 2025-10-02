@@ -1,0 +1,50 @@
+{
+  "common": {
+    "loading": "Загрузка...",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "add": "Добавить",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "export": "Экспорт",
+    "import": "Импорт",
+    "yes": "Да",
+    "no": "Нет",
+    "ok": "ОК",
+    "close": "Закрыть",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущий",
+    "submit": "Отправить",
+    "reset": "Сбросить"
+  },
+  "navigation": {
+    "dashboard": "Панель управления",
+    "clients": "Клиенты",
+    "commissions": "Комиссии",
+    "reports": "Отчеты",
+    "settings": "Настройки"
+  },
+  "dashboard": {
+    "title": "Панель управления",
+    "overview": "Обзор",
+    "statistics": "Статистика",
+    "recentActivity": "Последняя активность"
+  },
+  "clients": {
+    "title": "Клиенты",
+    "addClient": "Добавить клиента",
+    "editClient": "Редактировать клиента",
+    "deleteClient": "Удалить клиента",
+    "clientDetails": "Детали клиента"
+  },
+  "commissions": {
+    "title": "Комиссии",
+    "totalCommissions": "Общие комиссии",
+    "pendingCommissions": "Ожидающие комиссии",
+    "paidCommissions": "Выплаченные комиссии"
+  }
+}
+

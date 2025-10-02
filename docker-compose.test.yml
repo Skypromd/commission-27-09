@@ -1,0 +1,126 @@
+version: '3.8'
+
+services:
+  # Backend service for testing
+  backend-test:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.test
+    environment:
+      - DATABASE_URL=postgresql://postgres:testpass@postgres-test:5432/test_commission_db
+      - REDIS_URL=redis://redis-test:6379/0
+      - SECRET_KEY=test-secret-key-for-e2e-only
+      - ENVIRONMENT=testing
+      - DEBUG=true
+      - CORS_ORIGINS=["http://localhost:3000", "http://frontend-test:3000"]
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres-test:
+        condition: service_healthy
+      redis-test:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Frontend service for testing
+  frontend-test:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.test
+    environment:
+      - REACT_APP_API_URL=http://backend-test:8000
+      - REACT_APP_ENVIRONMENT=testing
+      - NODE_ENV=test
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend-test:
+        condition: service_healthy
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm start
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Test database
+  postgres-test:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: test_commission_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: testpass
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+      - ./backend/sql/test_data.sql:/docker-entrypoint-initdb.d/test_data.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d test_commission_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Test Redis
+  redis-test:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Nginx for routing (optional)
+  nginx-test:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.test.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend-test
+      - backend-test
+
+  # Test data seeder
+  test-data-seeder:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.test
+    environment:
+      - DATABASE_URL=postgresql://postgres:testpass@postgres-test:5432/test_commission_db
+      - REDIS_URL=redis://redis-test:6379/0
+    depends_on:
+      postgres-test:
+        condition: service_healthy
+      redis-test:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    command: python -m scripts.seed_test_data
+    restart: "no"
+
+  # Mailhog for email testing
+  mailhog-test:
+    image: mailhog/mailhog:latest
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+
+volumes:
+  postgres_test_data:
+
+networks:
+  default:
+    name: uk-commission-test-network

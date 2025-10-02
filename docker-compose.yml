@@ -1,0 +1,61 @@
+services:
+  db:
+    image: postgres:13-alpine
+    container_name: uk-commission-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=commission_tracker_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - commission-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: uk-commission-backend
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.config.settings
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/commission_tracker_db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/backend
+    networks:
+      - commission-network
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: uk-commission-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - node_modules_volume:/app/node_modules
+    networks:
+      - commission-network
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+networks:
+  commission-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  node_modules_volume: {}

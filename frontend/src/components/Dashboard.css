@@ -1,0 +1,444 @@
+/* Dashboard.css - Красивые стили для админ-панели */
+
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-header {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-header h1 {
+  font-size: 2.5em;
+  margin: 0 0 10px 0;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.dashboard-header p {
+  color: #666;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+.dashboard-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1em;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn.active {
+  background: white;
+  color: #667eea;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.overview-section,
+.users-section,
+.clients-section,
+.commissions-section {
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+  font-size: 3em;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+}
+
+.stat-card.primary .stat-icon {
+  background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.stat-card.success .stat-icon {
+  background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.stat-card.warning .stat-icon {
+  background: linear-gradient(45deg, #fa709a 0%, #fee140 100%);
+}
+
+.stat-card.info .stat-icon {
+  background: linear-gradient(45deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.stat-content h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.stat-value {
+  font-size: 2.2em;
+  font-weight: bold;
+  margin: 0;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.recent-activity {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity h3 {
+  margin: 0 0 25px 0;
+  color: #333;
+  font-size: 1.4em;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #f8f9ff;
+  border-radius: 15px;
+  border-left: 4px solid #667eea;
+  transition: transform 0.2s ease;
+}
+
+.activity-item:hover {
+  transform: translateX(5px);
+  background: #f0f2ff;
+}
+
+.activity-info {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.activity-amount {
+  font-weight: bold;
+  color: #667eea;
+  font-size: 1.1em;
+}
+
+.activity-type {
+  background: #e8f2ff;
+  padding: 5px 12px;
+  border-radius: 10px;
+  font-size: 0.9em;
+  color: #667eea;
+}
+
+.activity-status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.status-pending { background: #fff3cd; color: #856404; }
+.status-paid { background: #d1edff; color: #0c5460; }
+.status-confirmed { background: #d4edda; color: #155724; }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 20px 20px 0 0;
+  margin-bottom: 0;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.data-table {
+  background: white;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.data-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  background: #f8f9ff;
+  padding: 20px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.data-table td {
+  padding: 20px;
+  border-bottom: 1px solid #e9ecef;
+  transition: background 0.2s ease;
+}
+
+.data-table tr:hover td {
+  background: #f8f9ff;
+}
+
+.role-badge,
+.type-badge,
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.85em;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.role-admin { background: #e3f2fd; color: #1565c0; }
+.role-adviser { background: #f3e5f5; color: #7b1fa2; }
+.role-production_admin { background: #ffebee; color: #c62828; }
+
+.type-initial { background: #e8f5e8; color: #2e7d32; }
+.type-renewal { background: #fff3e0; color: #ef6c00; }
+.type-trail { background: #f3e5f5; color: #7b1fa2; }
+
+.status-badge.active { background: #c8e6c9; color: #2e7d32; }
+.status-badge.inactive { background: #ffcdd2; color: #c62828; }
+
+.btn-small {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.85em;
+  margin-right: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-edit {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.btn-edit:hover {
+  background: #1565c0;
+  color: white;
+}
+
+.btn-view {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.btn-view:hover {
+  background: #7b1fa2;
+  color: white;
+}
+
+.btn-pay {
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.btn-pay:hover {
+  background: #2e7d32;
+  color: white;
+}
+
+.amount-cell {
+  font-weight: bold;
+  color: #667eea;
+  font-size: 1.1em;
+}
+
+.dashboard-footer {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px;
+  border-radius: 20px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-footer p {
+  margin: 0;
+  color: #666;
+}
+
+.btn-refresh {
+  background: linear-gradient(45deg, #43e97b, #38f9d7);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-refresh:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(67, 233, 123, 0.3);
+}
+
+.dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: white;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-left: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 10px;
+  }
+
+  .dashboard-nav {
+    flex-direction: column;
+  }
+
+  .nav-btn {
+    text-align: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .data-table {
+    overflow-x: auto;
+  }
+
+  .dashboard-footer {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

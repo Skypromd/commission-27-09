@@ -1,0 +1,46 @@
+.item {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.icon {
+    fill: var(--secondary-color);
+    margin-right: 10px;
+}
+
+.link {
+    opacity: 1;
+    transition: opacity 0.3s;
+    color: var(--secondary-color);
+}
+
+.item.collapsed {
+    .link {
+        opacity: 0;
+        width: 0;
+    }
+}
+
+.item.active {
+    background: var(--inverted-bg-color);
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        background: var(--primary-color);
+        left: 0;
+    }
+
+    .icon {
+        fill: var(--primary-color);
+    }
+
+    .link {
+        color: var(--primary-color);
+    }
+}

@@ -1,0 +1,49 @@
+{
+  "common": {
+    "loading": "Завантаження...",
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "edit": "Редагувати",
+    "add": "Додати",
+    "search": "Пошук",
+    "filter": "Фільтр",
+    "export": "Експорт",
+    "import": "Імпорт",
+    "yes": "Так",
+    "no": "Ні",
+    "ok": "OK",
+    "close": "Закрити",
+    "back": "Назад",
+    "next": "Далі",
+    "previous": "Попередній",
+    "submit": "Надіслати",
+    "reset": "Скинути"
+  },
+  "navigation": {
+    "dashboard": "Панель керування",
+    "clients": "Клієнти",
+    "commissions": "Комісії",
+    "reports": "Звіти",
+    "settings": "Налаштування"
+  },
+  "dashboard": {
+    "title": "Панель керування",
+    "overview": "Огляд",
+    "statistics": "Статистика",
+    "recentActivity": "Остання активність"
+  },
+  "clients": {
+    "title": "Клієнти",
+    "addClient": "Додати клієнта",
+    "editClient": "Редагувати клієнта",
+    "deleteClient": "Видалити клієнта",
+    "clientDetails": "Деталі клієнта"
+  },
+  "commissions": {
+    "title": "Комісії",
+    "totalCommissions": "Загальні комісії",
+    "pendingCommissions": "Очікувані комісії",
+    "paidCommissions": "Виплачені комісії"
+  }
+}

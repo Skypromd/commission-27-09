@@ -1,0 +1,55 @@
+[
+    {
+        "id": "1",
+        "title": "Javascript news",
+        "subtitle": "Что нового в JS за 2022 год?",
+        "img": "https://teknotower.com/wp-content/uploads/2020/11/js.png",
+        "views": 1022,
+        "createdAt": "26.02.2022",
+        "userId": "1",
+        "type": [
+            "IT"
+        ],
+        "blocks": []
+    },
+    {
+        "id": "2",
+        "title": "Python news",
+        "subtitle": "Что нового в Python за 2022 год?",
+        "img": "https://www.python.org/static/community_logos/python-logo-master-v3-TM.png",
+        "views": 522,
+        "createdAt": "27.02.2022",
+        "userId": "1",
+        "type": [
+            "IT"
+        ],
+        "blocks": []
+    },
+    {
+        "id": "3",
+        "title": "All about football",
+        "subtitle": "The latest news from the world of football",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Football_in_Bloomington%2C_Indiana%2C_1996.jpg",
+        "views": 22,
+        "createdAt": "28.02.2022",
+        "userId": "2",
+        "type": [
+            "SPORT"
+        ],
+        "blocks": []
+    },
+    {
+        "id": "4",
+        "title": "Science news",
+        "subtitle": "The latest discoveries in science",
+        "img": "https://images.the-scientist.com/content/images/articles/00000/300_main_220831_iStock-1329498832.jpg",
+        "views": 5122,
+        "createdAt": "01.03.2022",
+        "userId": "1",
+        "type": [
+            "SCIENCE"
+        ],
+        "blocks": []
+    }
+]
+

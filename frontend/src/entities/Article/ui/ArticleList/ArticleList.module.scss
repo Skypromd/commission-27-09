@@ -1,0 +1,15 @@
+.ArticleList {
+    // TODO
+}
+
+.SMALL {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    gap: 16px;
+    justify-content: center;
+}
+
+.BIG {
+    display: flex;
+    flex-direction: column;
+}

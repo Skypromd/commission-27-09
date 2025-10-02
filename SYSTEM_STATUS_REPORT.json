@@ -1,0 +1,48 @@
+{
+  "backend": {
+    "status": "working",
+    "details": {
+      "endpoints": [
+        "/",
+        "/health",
+        "/docs",
+        "/api/v1/clients",
+        "/api/v1/commissions"
+      ]
+    }
+  },
+  "frontend": {
+    "status": "files_ready",
+    "details": {
+      "files": [
+        "package.json",
+        "src/main.tsx",
+        "src/App.tsx",
+        "index.html"
+      ]
+    }
+  },
+  "database": {
+    "status": "available",
+    "details": {
+      "files": [
+        "uk_commission.db",
+        "uk_financial_services.db",
+        "backend/sql_app.db",
+        "backend/uk_commission_full.db"
+      ]
+    }
+  },
+  "ports": {
+    "status": "unknown",
+    "details": {},
+    "backend": true,
+    "frontend": false
+  },
+  "files": {
+    "status": "complete",
+    "details": {}
+  },
+  "overall_status": "ready",
+  "timestamp": "2025-08-27 22:32:57"
+}
