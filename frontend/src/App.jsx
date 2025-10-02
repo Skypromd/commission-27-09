@@ -557,7 +557,14 @@ function App() {
             ].map((module) => (
               <div 
                 key={module.name} 
-                onClick={() => ['deals', 'advisers', 'clients', 'products'].includes(module.key) ? loadModuleData(module.key) : null}
+                onClick={() => {
+                  console.log('Module clicked:', module.key);
+                  if (['deals', 'advisers', 'clients', 'products'].includes(module.key)) {
+                    loadModuleData(module.key);
+                  } else {
+                    alert(`${module.name} модуль в разработке. Доступны: Deals, Advisers, Clients, Products`);
+                  }
+                }}
                 className={`text-center p-4 border border-gray-200 rounded-lg transition-all cursor-pointer ${module.color} ${loading && selectedModule === module.key ? 'animate-pulse' : ''}`}
               >
                 <div className="text-2xl mb-2">{module.icon}</div>
