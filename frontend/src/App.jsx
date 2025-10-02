@@ -47,19 +47,33 @@ function App() {
     setLoginLoading(true);
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch(`${API_BASE}/users/auth/login/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: credentials.username,
+          password: credentials.password
+        })
+      });
+
+      const data = await response.json();
       
-      if (credentials.username === 'admin' && credentials.password === 'admin') {
+      if (response.ok && data.success) {
         const userData = {
-          id: 1,
-          username: 'admin',
-          firstName: 'System',
-          lastName: 'Administrator',
-          email: 'admin@commissiontracker.com',
-          role: 'Administrator',
+          id: data.user.id,
+          username: data.user.username,
+          firstName: data.user.first_name || '',
+          lastName: data.user.last_name || '',
+          email: data.user.email,
+          role: data.user.role,
           avatar: '👤',
-          twoFactorEnabled: true
+          twoFactorEnabled: data.requires_2fa || false
         };
+        
+        // Сохраняем токен
+        localStorage.setItem('commissionTracker_token', data.token);
         
         // Если включена 2FA, переходим к верификации
         if (userData.twoFactorEnabled) {
@@ -75,9 +89,10 @@ function App() {
         
         return { success: true };
       } else {
-        return { success: false, error: 'Invalid credentials' };
+        return { success: false, error: data.error || 'Login failed' };
       }
     } catch (error) {
+      console.error('Login error:', error);
       return { success: false, error: 'Connection error' };
     } finally {
       setLoginLoading(false);
