@@ -40,14 +40,20 @@ function App() {
   const loadDashboardData = async () => {
     setLoading(true);
     try {
-      // Загружаем данные из модернизированных API
-      const [dealsRes, advisersRes, clientsRes, productsRes, insurancesRes, mortgagesRes] = await Promise.all([
+      // Загружаем данные из ВСЕХ модулей
+      const [dealsRes, advisersRes, clientsRes, productsRes, insurancesRes, mortgagesRes, salesRes, reportsRes, notificationsRes, tasksRes, auditRes, analyticsRes] = await Promise.all([
         fetch(`${API_BASE}/deals/deals/`).catch(() => null),
         fetch(`${API_BASE}/advisers/advisers/`).catch(() => null),
         fetch(`${API_BASE}/clients/clients/`).catch(() => null),
         fetch(`${API_BASE}/products/products/`).catch(() => null),
         fetch(`${API_BASE}/insurances/insurances/`).catch(() => null),
         fetch(`${API_BASE}/mortgage/mortgages/`).catch(() => null),
+        fetch(`${API_BASE}/sales/sales/`).catch(() => null),
+        fetch(`${API_BASE}/reports/reports/`).catch(() => null),
+        fetch(`${API_BASE}/notifications/notifications/`).catch(() => null),
+        fetch(`${API_BASE}/tasks/tasks/`).catch(() => null),
+        fetch(`${API_BASE}/audit/audit/`).catch(() => null),
+        fetch(`${API_BASE}/bi/analytics/`).catch(() => null),
       ]);
 
       const newData = {};
