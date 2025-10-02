@@ -1458,9 +1458,32 @@ function App() {
     );
   };
 
-  // Показываем страницу входа если не авторизован
+  // Показываем соответствующую страницу авторизации если не авторизован
   if (!isAuthenticated) {
-    return <LoginPage />;
+    if (authMode === 'register') {
+      return (
+        <Registration
+          onRegistrationSuccess={handleRegister}
+          onBackToLogin={() => setAuthMode('login')}
+          loading={loginLoading}
+        />
+      );
+    } else if (authMode === '2fa') {
+      return (
+        <TwoFactorAuth
+          onTwoFactorSuccess={handleTwoFactorVerification}
+          onBackToLogin={() => {
+            setAuthMode('login');
+            setPendingUser(null);
+            setTwoFactorCode('');
+          }}
+          loading={loginLoading}
+          user={pendingUser}
+        />
+      );
+    } else {
+      return <LoginPage />;
+    }
   }
 
   return (
