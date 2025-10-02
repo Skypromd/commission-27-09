@@ -76,6 +76,24 @@ function App() {
       if (mortgagesRes && mortgagesRes.ok) {
         newData.mortgages = await mortgagesRes.json();
       }
+      if (salesRes && salesRes.ok) {
+        newData.sales = await salesRes.json();
+      }
+      if (reportsRes && reportsRes.ok) {
+        newData.reports = await reportsRes.json();
+      }
+      if (notificationsRes && notificationsRes.ok) {
+        newData.notifications = await notificationsRes.json();
+      }
+      if (tasksRes && tasksRes.ok) {
+        newData.tasks = await tasksRes.json();
+      }
+      if (auditRes && auditRes.ok) {
+        newData.audit = await auditRes.json();
+      }
+      if (analyticsRes && analyticsRes.ok) {
+        newData.bi = await analyticsRes.json();
+      }
 
       setData(newData);
     } catch (error) {
