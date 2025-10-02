@@ -209,15 +209,33 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    const token = localStorage.getItem('commissionTracker_token');
+    
+    if (token) {
+      try {
+        await fetch(`${API_BASE}/users/auth/logout/`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
+    }
+    
     setIsAuthenticated(false);
     setUser(null);
     setCurrentView('dashboard');
     setData({});
+    setAuthMode('login');
     
     // Очищаем localStorage
     localStorage.removeItem('commissionTracker_auth');
     localStorage.removeItem('commissionTracker_user');
+    localStorage.removeItem('commissionTracker_token');
   };
 
   const checkApiConnection = async () => {
