@@ -509,9 +509,11 @@ class AuthenticationTester:
         print("\n=== Testing Complete Authentication Flow ===")
         
         # Step 1: Register new user for flow test
+        import time
+        flow_timestamp = str(int(time.time()))
         flow_user_data = {
-            "username": "flowtest456",
-            "email": "flowtest456@example.com",
+            "username": f"flowtest{flow_timestamp}",
+            "email": f"flowtest{flow_timestamp}@example.com",
             "password": "FlowTestPassword123!",
             "first_name": "Flow",
             "last_name": "Test"
