@@ -898,12 +898,22 @@ function App() {
               <p className="text-gray-600 mt-1">Enterprise-grade commission tracking and business intelligence</p>
             </div>
             <div className="flex items-center space-x-4">
+              <div className="text-right mr-4">
+                <div className="text-sm text-gray-500">Welcome back,</div>
+                <div className="text-sm font-semibold text-gray-800">{user?.firstName} {user?.lastName}</div>
+              </div>
               <div className="text-right">
                 <div className="text-sm text-gray-500">System Status</div>
                 <div className={`text-sm font-semibold ${apiStatus === 'connected' ? 'text-green-600' : 'text-red-600'}`}>
                   {apiStatus === 'connected' ? '🟢 All Systems Operational' : '🔴 Connection Issues'}
                 </div>
               </div>
+              <button
+                onClick={handleLogout}
+                className="ml-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>
