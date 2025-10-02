@@ -583,12 +583,52 @@ function App() {
                 stats: '15 reports available'
               },
               { 
-                name: 'Settings', 
-                key: 'settings',
-                icon: '⚙️', 
-                desc: 'System Configuration',
-                color: 'hover:bg-gray-50 hover:border-gray-300',
-                stats: 'System ready'
+                name: 'Sales', 
+                key: 'sales',
+                icon: '💰', 
+                desc: 'Sales Management',
+                color: 'hover:bg-yellow-50 hover:border-yellow-200',
+                stats: data.sales ? `${data.sales.count || 0} sales` : 'Loading...'
+              },
+              { 
+                name: 'Reports', 
+                key: 'reports',
+                icon: '📊', 
+                desc: 'Analytics & Reports',
+                color: 'hover:bg-red-50 hover:border-red-200',
+                stats: data.reports ? `${data.reports.count || 0} reports` : 'Loading...'
+              },
+              { 
+                name: 'Notifications', 
+                key: 'notifications',
+                icon: '🔔', 
+                desc: 'System Notifications',
+                color: 'hover:bg-blue-50 hover:border-blue-200',
+                stats: data.notifications ? `${data.notifications.unread_count || 0} unread` : 'Loading...'
+              },
+              { 
+                name: 'Tasks', 
+                key: 'tasks',
+                icon: '📝', 
+                desc: 'Task Management',
+                color: 'hover:bg-green-50 hover:border-green-200',
+                stats: data.tasks ? `${data.tasks.open_tasks || 0} open` : 'Loading...'
+              },
+              { 
+                name: 'Audit', 
+                key: 'audit',
+                icon: '🔍', 
+                desc: 'System Audit',
+                color: 'hover:bg-purple-50 hover:border-purple-200',
+                stats: data.audit ? `${data.audit.today_actions || 0} today` : 'Loading...'
+              },
+              { 
+                name: 'Analytics', 
+                key: 'bi',
+                icon: '📈', 
+                desc: 'Business Intelligence',
+                color: 'hover:bg-indigo-50 hover:border-indigo-200',
+                stats: 'Advanced BI'
               }
             ].map((module) => (
               <div 
