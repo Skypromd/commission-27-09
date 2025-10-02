@@ -121,7 +121,7 @@ class AuthenticationTester:
         
         # Test 3: Invalid email
         invalid_email_data = test_user_data.copy()
-        invalid_email_data['username'] = 'testuser456'
+        invalid_email_data['username'] = f'testuser{timestamp}456'
         invalid_email_data['email'] = 'invalid-email'
         
         try:
