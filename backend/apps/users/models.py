@@ -34,6 +34,8 @@ class User(AbstractUser, MPTTModel):
     agency_number = models.CharField(max_length=50, blank=True, null=True, unique=True, help_text="Уникальный номер агентства/менеджера")
     parent_agency_id = models.CharField(max_length=50, blank=True, null=True, help_text="Номер родительского агентства")
 
+    objects = UserTreeManager()
+
     class MPTTMeta:
         order_insertion_by = ['username']
 
