@@ -571,9 +571,11 @@ function App() {
                 <div className="font-medium text-gray-900">{module.name}</div>
                 <div className="text-xs text-gray-500 mb-1">{module.desc}</div>
                 <div className="text-xs font-medium text-blue-600">{module.stats}</div>
-                {['deals', 'advisers', 'clients', 'products'].includes(module.key) && (
-                  <div className="mt-2 text-xs text-gray-400">Click to explore →</div>
-                )}
+                <div className="mt-2 text-xs text-gray-400">
+                  {['deals', 'advisers', 'clients', 'products'].includes(module.key) 
+                    ? 'Click to explore →' 
+                    : 'Coming soon...'}
+                </div>
               </div>
             ))}
           </div>
