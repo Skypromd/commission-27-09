@@ -103,27 +103,55 @@ function App() {
     setLoginLoading(true);
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch(`${API_BASE}/users/auth/register/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: userData.username,
+          email: userData.email,
+          password: userData.password,
+          first_name: userData.firstName || '',
+          last_name: userData.lastName || ''
+        })
+      });
+
+      const data = await response.json();
       
-      // Имитация успешной регистрации
-      const newUser = {
-        id: Date.now(),
-        username: userData.username,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        email: userData.email,
-        role: 'User',
-        avatar: '👤',
-        twoFactorEnabled: true
-      };
-      
-      // После регистрации требуется 2FA
-      setPendingUser(newUser);
-      setAuthMode('2fa');
-      
-      return { success: true, message: 'Registration successful! Please verify your 2FA code.' };
+      if (response.ok && data.success) {
+        const newUser = {
+          id: data.user.id,
+          username: data.user.username,
+          firstName: data.user.first_name || '',
+          lastName: data.user.last_name || '',
+          email: data.user.email,
+          role: data.user.role,
+          avatar: '👤',
+          twoFactorEnabled: data.requires_2fa || false
+        };
+        
+        // Сохраняем токен
+        localStorage.setItem('commissionTracker_token', data.token);
+        
+        // После регистрации можно сразу войти или требовать 2FA
+        if (newUser.twoFactorEnabled) {
+          setPendingUser(newUser);
+          setAuthMode('2fa');
+          return { success: true, message: 'Registration successful! Please verify your 2FA code.' };
+        } else {
+          setUser(newUser);
+          setIsAuthenticated(true);
+          localStorage.setItem('commissionTracker_auth', 'true');
+          localStorage.setItem('commissionTracker_user', JSON.stringify(newUser));
+          return { success: true, message: 'Registration successful! You are now logged in.' };
+        }
+      } else {
+        return { success: false, error: data.errors || data.error || 'Registration failed' };
+      }
     } catch (error) {
-      return { success: false, error: 'Registration failed' };
+      console.error('Registration error:', error);
+      return { success: false, error: 'Connection error' };
     } finally {
       setLoginLoading(false);
     }
