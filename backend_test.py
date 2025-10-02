@@ -41,9 +41,11 @@ class AuthenticationTester:
         print("\n=== Testing User Registration ===")
         
         # Test 1: Valid registration
+        import time
+        timestamp = str(int(time.time()))
         test_user_data = {
-            "username": "testuser123",
-            "email": "testuser123@example.com",
+            "username": f"testuser{timestamp}",
+            "email": f"testuser{timestamp}@example.com",
             "password": "SecurePassword123!",
             "first_name": "John",
             "last_name": "Doe"
