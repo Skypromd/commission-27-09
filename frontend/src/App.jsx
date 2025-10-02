@@ -18,9 +18,75 @@ function App() {
     : 'http://localhost:8080/api';
 
   useEffect(() => {
-    checkApiConnection();
-    loadDashboardData();
+    // Проверяем авторизацию при загрузке
+    checkAuthStatus();
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      checkApiConnection();
+      loadDashboardData();
+    }
+  }, [isAuthenticated]);
+
+  const checkAuthStatus = () => {
+    // Проверяем сохраненную сессию
+    const savedAuth = localStorage.getItem('commissionTracker_auth');
+    const savedUser = localStorage.getItem('commissionTracker_user');
+    
+    if (savedAuth && savedUser) {
+      setIsAuthenticated(true);
+      setUser(JSON.parse(savedUser));
+    }
+  };
+
+  const handleLogin = async (credentials) => {
+    setLoginLoading(true);
+    
+    try {
+      // Имитация API входа (в реальном проекте здесь будет настоящий API)
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Имитация задержки
+      
+      // Простая проверка демо-данных
+      if (credentials.username === 'admin' && credentials.password === 'admin') {
+        const userData = {
+          id: 1,
+          username: 'admin',
+          firstName: 'System',
+          lastName: 'Administrator',
+          email: 'admin@commissiontracker.com',
+          role: 'Administrator',
+          avatar: '👤'
+        };
+        
+        setUser(userData);
+        setIsAuthenticated(true);
+        
+        // Сохраняем в localStorage
+        localStorage.setItem('commissionTracker_auth', 'true');
+        localStorage.setItem('commissionTracker_user', JSON.stringify(userData));
+        
+        return { success: true };
+      } else {
+        return { success: false, error: 'Invalid credentials' };
+      }
+    } catch (error) {
+      return { success: false, error: 'Connection error' };
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUser(null);
+    setCurrentView('dashboard');
+    setData({});
+    
+    // Очищаем localStorage
+    localStorage.removeItem('commissionTracker_auth');
+    localStorage.removeItem('commissionTracker_user');
+  };
 
   const checkApiConnection = async () => {
     try {
