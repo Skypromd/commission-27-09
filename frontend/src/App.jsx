@@ -41,11 +41,13 @@ function App() {
     setLoading(true);
     try {
       // Загружаем данные из модернизированных API
-      const [dealsRes, advisersRes, clientsRes, productsRes] = await Promise.all([
+      const [dealsRes, advisersRes, clientsRes, productsRes, insurancesRes, mortgagesRes] = await Promise.all([
         fetch(`${API_BASE}/deals/deals/`).catch(() => null),
         fetch(`${API_BASE}/advisers/advisers/`).catch(() => null),
         fetch(`${API_BASE}/clients/clients/`).catch(() => null),
         fetch(`${API_BASE}/products/products/`).catch(() => null),
+        fetch(`${API_BASE}/insurances/insurances/`).catch(() => null),
+        fetch(`${API_BASE}/mortgage/mortgages/`).catch(() => null),
       ]);
 
       const newData = {};
