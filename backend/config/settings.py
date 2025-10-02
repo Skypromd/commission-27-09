@@ -42,23 +42,23 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_spectacular",
     # Your Project Apps
+    "apps.core",  # Your core app with shared logic
     "apps.users",
     "apps.advisers",
     "apps.clients",
     "apps.products",
-    "apps.policies",
-    "apps.deals",
-    "apps.commission",
-    "apps.insurances",
-    "apps.mortgage",
-    "apps.sales",
-    "apps.reports",
-    "apps.notifications",
-    "apps.audit",
-    "apps.tasks",
-    "apps.bi_analytics",
-    "apps.api_keys",
-    "apps.core",  # Your core app with shared logic
+    # "apps.policies",  # Временно отключено
+    # "apps.deals",     # Временно отключено
+    # "apps.commission", # Временно отключено
+    # "apps.insurances", # Временно отключено
+    # "apps.mortgage",   # Временно отключено
+    # "apps.sales",      # Временно отключено
+    # "apps.reports",    # Временно отключено
+    # "apps.notifications", # Временно отключено
+    # "apps.audit",      # Временно отключено
+    # "apps.tasks",      # Временно отключено
+    # "apps.bi_analytics", # Временно отключено
+    # "apps.api_keys",   # Временно отключено
 ]
 
 MIDDLEWARE = [
