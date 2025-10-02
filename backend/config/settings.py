@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third-party Apps
     "rest_framework",
-    "rest_framework_api_key",
+    "rest_framework.authtoken",
+    "rest_framework_api_key", 
     "corsheaders",
     "drf_spectacular",
     # Your Project Apps
