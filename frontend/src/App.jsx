@@ -635,7 +635,7 @@ function App() {
                 key={module.name} 
                 onClick={() => {
                   console.log('Module clicked:', module.key);
-                  if (['deals', 'advisers', 'clients', 'products', 'insurances', 'mortgages'].includes(module.key)) {
+                  if (['deals', 'advisers', 'clients', 'products', 'insurances', 'mortgages', 'sales', 'reports', 'notifications', 'tasks', 'audit', 'bi'].includes(module.key)) {
                     loadModuleData(module.key);
                   } else {
                     alert(`${module.name} модуль в разработке. Доступны: Deals, Advisers, Clients, Products, Insurances, Mortgage`);
