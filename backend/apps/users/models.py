@@ -1,7 +1,13 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
+from mptt.managers import TreeManager
+
+
+class UserTreeManager(TreeManager, UserManager):
+    """Custom manager that combines TreeManager and UserManager functionality."""
+    pass
 
 
 class User(AbstractUser, MPTTModel):
