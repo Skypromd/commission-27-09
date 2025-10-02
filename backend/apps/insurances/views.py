@@ -139,7 +139,7 @@ class InsuranceTypeViewSet(viewsets.ModelViewSet):
     serializer_class = InsuranceTypeSerializer
     permission_classes = [IsAdminOrReadOnly]
 
-class PolicyViewSet(HierarchicalQuerySetMixin, AdviserObjectOwnerMixin, viewsets.ModelViewSet):
+class PolicyViewSet(viewsets.ModelViewSet):
     """API endpoint for insurance policies with hierarchical permissions."""
     queryset = Policy.objects.select_related(
         'insurer', 'adviser__user', 'client', 'insurance_type', 'commission'
