@@ -91,7 +91,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
-        "apps.api_keys.authentication.APIKeyAuthentication",
+        # "apps.api_keys.authentication.APIKeyAuthentication",  # Временно отключено
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
