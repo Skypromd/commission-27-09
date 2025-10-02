@@ -88,6 +88,338 @@ function App() {
     }
   };
 
+  const ModuleView = ({ module, data }) => {
+    const moduleConfigs = {
+      deals: {
+        title: '💼 Sales Pipeline',
+        color: 'bg-blue-600',
+        metrics: data?.deals || {},
+        actions: ['View Pipeline', 'Create Deal', 'Analytics']
+      },
+      advisers: {
+        title: '🤵 Team Management', 
+        color: 'bg-green-600',
+        metrics: data?.advisers || {},
+        actions: ['View Team', 'Performance', 'Training']
+      },
+      clients: {
+        title: '👥 Client Portfolio',
+        color: 'bg-purple-600', 
+        metrics: data?.clients || {},
+        actions: ['Client List', 'Analytics', 'Communications']
+      },
+      products: {
+        title: '🏷️ Product Catalog',
+        color: 'bg-orange-600',
+        metrics: data?.products || {},
+        actions: ['Product List', 'Sales Analytics', 'Inventory']
+      }
+    };
+
+    const config = moduleConfigs[module];
+    if (!config) return <div>Module not found</div>;
+
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">{config.title}</h2>
+            <p className="text-gray-600">Comprehensive {module} management</p>
+          </div>
+          <button 
+            onClick={() => setCurrentView('dashboard')}
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+          >
+            ← Back to Dashboard
+          </button>
+        </div>
+
+        {/* Module-specific content */}
+        {module === 'deals' && <DealsModule data={config.metrics} />}
+        {module === 'advisers' && <AdvisersModule data={config.metrics} />}
+        {module === 'clients' && <ClientsModule data={config.metrics} />}
+        {module === 'products' && <ProductsModule data={config.metrics} />}
+      </div>
+    );
+  };
+
+  const DealsModule = ({ data }) => (
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="lg:col-span-2">
+        <div className="bg-white rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold mb-4">🔥 Sales Pipeline Overview</h3>
+          {data.pipeline_overview ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-600">{data.pipeline_overview.total_deals}</div>
+                <div className="text-sm text-gray-600">Total Deals</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-600">${(data.pipeline_overview.total_value / 1000).toFixed(0)}k</div>
+                <div className="text-sm text-gray-600">Pipeline Value</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-purple-600">{(data.pipeline_overview.win_rate * 100).toFixed(0)}%</div>
+                <div className="text-sm text-gray-600">Win Rate</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-orange-600">{data.pipeline_overview.avg_cycle_time}d</div>
+                <div className="text-sm text-gray-600">Avg Cycle</div>
+              </div>
+            </div>
+          ) : (
+            <div className="text-center text-gray-500">Loading pipeline data...</div>
+          )}
+        </div>
+
+        <div className="mt-6 bg-white rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold mb-4">📊 Recent Deals</h3>
+          {data.recent_deals ? (
+            <div className="space-y-3">
+              {data.recent_deals.slice(0, 5).map((deal, index) => (
+                <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                  <div>
+                    <div className="font-medium">{deal.client_name}</div>
+                    <div className="text-sm text-gray-600">{deal.product}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold">${deal.value.toLocaleString()}</div>
+                    <div className="text-sm text-gray-600">{deal.stage}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-500">No deals data</div>
+          )}
+        </div>
+      </div>
+
+      <div className="space-y-6">
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-6 text-white">
+          <h3 className="text-lg font-semibold mb-2">🎯 This Month</h3>
+          {data.performance_metrics?.this_month ? (
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>Deals Closed:</span>
+                <span className="font-bold">{data.performance_metrics.this_month.deals_closed}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Revenue:</span>
+                <span className="font-bold">${(data.performance_metrics.this_month.revenue / 1000).toFixed(0)}k</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Target:</span>
+                <span className="font-bold">{(data.performance_metrics.this_month.target_achievement * 100).toFixed(0)}%</span>
+              </div>
+            </div>
+          ) : (
+            <div>Loading performance data...</div>
+          )}
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold mb-4">🏆 Top Performers</h3>
+          {data.team_leaderboard ? (
+            <div className="space-y-2">
+              {data.team_leaderboard.slice(0, 4).map((performer, index) => (
+                <div key={index} className="flex items-center space-x-2">
+                  <div className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium">{performer.adviser}</div>
+                    <div className="text-xs text-gray-600">{performer.deals_closed} deals</div>
+                  </div>
+                  <div className="text-sm font-semibold text-green-600">
+                    ${(performer.revenue / 1000).toFixed(0)}k
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-500">Loading leaderboard...</div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  const AdvisersModule = ({ data }) => (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">👨‍💼 Team Overview</h3>
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="text-center p-4 bg-green-50 rounded-lg">
+            <div className="text-2xl font-bold text-green-600">{data.results?.length || 0}</div>
+            <div className="text-sm text-gray-600">Active Advisers</div>
+          </div>
+          <div className="text-center p-4 bg-blue-50 rounded-lg">
+            <div className="text-2xl font-bold text-blue-600">92%</div>
+            <div className="text-sm text-gray-600">Avg Performance</div>
+          </div>
+        </div>
+        
+        {data.results?.length > 0 ? (
+          <div className="space-y-3">
+            {data.results.slice(0, 5).map((adviser, index) => (
+              <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                <div>
+                  <div className="font-medium">{adviser.user?.first_name} {adviser.user?.last_name}</div>
+                  <div className="text-sm text-gray-600">{adviser.role || 'Adviser'}</div>
+                </div>
+                <div className="text-sm">
+                  <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full">Active</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">Loading advisers...</div>
+        )}
+      </div>
+
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">📈 Performance Metrics</h3>
+        <div className="space-y-4">
+          <div className="p-4 bg-purple-50 rounded-lg">
+            <div className="text-lg font-semibold text-purple-600">Team Revenue</div>
+            <div className="text-2xl font-bold">$1.2M</div>
+            <div className="text-sm text-gray-600">+15% vs last month</div>
+          </div>
+          <div className="p-4 bg-orange-50 rounded-lg">
+            <div className="text-lg font-semibold text-orange-600">Client Satisfaction</div>
+            <div className="text-2xl font-bold">4.8/5</div>
+            <div className="text-sm text-gray-600">Based on 234 reviews</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const ClientsModule = ({ data }) => (
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="lg:col-span-2 bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">👥 Client Portfolio</h3>
+        {data.results?.length > 0 ? (
+          <div className="space-y-3">
+            {data.results.slice(0, 8).map((client, index) => (
+              <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+                <div className="flex items-center space-x-4">
+                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                    <span className="text-purple-600 font-semibold">{client.name?.[0] || 'C'}</span>
+                  </div>
+                  <div>
+                    <div className="font-medium">{client.name}</div>
+                    <div className="text-sm text-gray-600">{client.email}</div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-sm font-medium">3 Policies</div>
+                  <div className="text-xs text-gray-500">$4,500 premium</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">Loading clients...</div>
+        )}
+      </div>
+
+      <div className="space-y-6">
+        <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-6 text-white">
+          <h3 className="text-lg font-semibold mb-4">📊 Client Stats</h3>
+          <div className="space-y-3">
+            <div className="flex justify-between">
+              <span>Total Clients:</span>
+              <span className="font-bold">{data.count || 0}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Active Policies:</span>
+              <span className="font-bold">127</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Avg LTV:</span>
+              <span className="font-bold">$15.2k</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold mb-4">🎯 Opportunities</h3>
+          <div className="space-y-3">
+            <div className="p-3 bg-yellow-50 rounded border-l-4 border-yellow-400">
+              <div className="text-sm font-medium">Cross-sell Travel Insurance</div>
+              <div className="text-xs text-gray-600">23 clients identified</div>
+            </div>
+            <div className="p-3 bg-green-50 rounded border-l-4 border-green-400">
+              <div className="text-sm font-medium">Policy Renewals Due</div>
+              <div className="text-xs text-gray-600">15 policies this month</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const ProductsModule = ({ data }) => (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">🏷️ Product Catalog</h3>
+        {data.results?.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {data.results.slice(0, 6).map((product, index) => (
+              <div key={index} className="p-4 border rounded-lg hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="font-medium">{product.name}</div>
+                  <span className={`px-2 py-1 text-xs rounded-full ${product.is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'}`}>
+                    {product.is_active ? 'Active' : 'Inactive'}
+                  </span>
+                </div>
+                <div className="text-sm text-gray-600 mb-2">{product.provider}</div>
+                <div className="text-xs text-gray-500">{product.description?.substring(0, 60)}...</div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">Loading products...</div>
+        )}
+      </div>
+
+      <div className="space-y-6">
+        <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg p-6 text-white">
+          <h3 className="text-lg font-semibold mb-4">📈 Sales Analytics</h3>
+          <div className="space-y-3">
+            <div className="flex justify-between">
+              <span>Total Products:</span>
+              <span className="font-bold">{data.count || 0}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Best Seller:</span>
+              <span className="font-bold">Life Insurance</span>
+            </div>
+            <div className="flex justify-between">
+              <span>This Month:</span>
+              <span className="font-bold">45 sold</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <h3 className="text-lg font-semibold mb-4">🔥 Top Performers</h3>
+          <div className="space-y-2">
+            {['Life Insurance Premium', 'Health Coverage Plus', 'Family Protection'].map((product, index) => (
+              <div key={index} className="flex justify-between items-center p-2">
+                <div className="text-sm">{product}</div>
+                <div className="text-sm font-semibold text-green-600">{25 - index * 3} sales</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   const DashboardView = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {/* Status Card */}
