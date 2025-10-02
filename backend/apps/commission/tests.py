@@ -7,9 +7,9 @@ from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 from rest_framework import status
 
-from backend.apps.advisers.models import Adviser
-from backend.apps.commission.models import Commission, Advance, Retention
-from backend.apps.policies.models import Policy
+from apps.advisers.models import Adviser
+from apps.commission.models import Commission, Advance, Retention
+from apps.policies.models import Policy
 
 User = get_user_model()
 

@@ -35,8 +35,8 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils import timezone
 
-from backend.apps.users.models import CustomUser
-from backend.apps.commission.models import Commission
+from apps.users.models import CustomUser
+from apps.commission.models import Commission
 
 @shared_task
 def generate_and_send_commission_report(manager_id: int):

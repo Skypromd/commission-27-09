@@ -17,12 +17,12 @@ from .serializers import (
     MortgageIngestionTaskSerializer
 )
 from .filters import MortgageCaseFilter, CommissionFilter
-from backend.apps.core.permissions import IsOwnerOrManager, HasReportAccess, IsAdminOrReadOnly
-from backend.apps.core.views import (
+from apps.core.permissions import IsOwnerOrManager, HasReportAccess, IsAdminOrReadOnly
+from apps.core.views import (
     BaseReportingViewSet, BaseDashboardViewSet, BaseRelatedObjectViewSet,
     BaseModifierViewSet, BaseDataIngestionViewSet
 )
-from backend.apps.core.mixins import AdviserObjectOwnerMixin, HierarchicalQuerySetMixin
+from apps.core.mixins import AdviserObjectOwnerMixin, HierarchicalQuerySetMixin
 from .tasks import process_mortgage_commission_ingestion
 from . import reports
 

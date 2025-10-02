@@ -3,8 +3,8 @@ from django.db.models import Sum, Avg, Count, DecimalField
 from django.db.models.functions import TruncMonth, Coalesce
 from django.utils import timezone
 
-from backend.apps.commission.models import Commission
-from backend.apps.policies.models import Policy
+from apps.commission.models import Commission
+from apps.policies.models import Policy
 
 
 class BIMetricService:
@@ -93,7 +93,7 @@ def get_financial_summary(user):
     """
     Возвращает финансовую сводку для указанного пользователя.
     """
-    from backend.apps.commission.api_views import get_commissions_for_user
+    from apps.commission.api_views import get_commissions_for_user
     commissions = get_commissions_for_user(user)
 
     summary = commissions.aggregate(

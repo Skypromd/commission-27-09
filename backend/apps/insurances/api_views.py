@@ -10,7 +10,7 @@ from .serializers import (
     RetentionSerializer, ClawbackSerializer, BonusSerializer, OverrideSerializer,
     ReferralFeeSerializer
 )
-from backend.apps.core.permissions import IsManager, IsOwnerOrManager
+from apps.core.permissions import IsManager, IsOwnerOrManager
 
 # --- Main ViewSets ---
 class PolicyViewSet(viewsets.ModelViewSet):

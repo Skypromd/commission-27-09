@@ -6,15 +6,15 @@ from django.db.models import Sum, Count, Q
 from rest_framework import viewsets, permissions, views, serializers
 from rest_framework.response import Response
 from .models import Commission, Retention, Clawback, CommissionSplit, Advance, Repayment, Bonus, VestingSchedule, ScheduledPayout, ReferralFee, Override
-from backend.apps.advisers.models import Adviser
+from apps.advisers.models import Adviser
 from .serializers import (
     CommissionSerializer, RetentionSerializer, ClawbackSerializer,
     CommissionSplitSerializer, AdvanceSerializer, RepaymentSerializer,
     BonusSerializer, VestingScheduleSerializer, ScheduledPayoutSerializer,
     ReferralFeeSerializer, OverrideSerializer
 )
-from backend.apps.advisers.serializers import AdviserSerializer
-from backend.apps.core.permissions import IsOwnerOrManager
+from apps.advisers.serializers import AdviserSerializer
+from apps.core.permissions import IsOwnerOrManager
 
 
 def get_commissions_for_user(user):

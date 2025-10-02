@@ -4,10 +4,10 @@ from datetime import datetime
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 
-from backend.apps.advisers.models import Adviser
-from backend.apps.commission.models import Commission
-from backend.apps.products.models import Product
-from backend.apps.policies.models import Policy
+from apps.advisers.models import Adviser
+from apps.commission.models import Commission
+from apps.products.models import Product
+from apps.policies.models import Policy
 
 User = get_user_model()
 

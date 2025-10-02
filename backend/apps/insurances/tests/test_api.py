@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
-from backend.apps.core.models import Adviser, Client
+from apps.core.models import Adviser, Client
 from ..models import Insurer, Policy, Commission, Bonus
 
 class InsuranceAPITests(APITestCase):

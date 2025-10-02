@@ -6,8 +6,8 @@ from decimal import Decimal
 import pytest
 from django.contrib.auth.models import User
 
-from backend.apps.commission.models import Deal
-from backend.apps.commission.services import get_deals_summary
+from apps.commission.models import Deal
+from apps.commission.services import get_deals_summary
 
 
 @pytest.mark.django_db

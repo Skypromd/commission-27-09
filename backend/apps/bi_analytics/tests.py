@@ -6,10 +6,10 @@ from datetime import date, timedelta
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from backend.apps.advisers.models import Adviser
-from backend.apps.commission.models import Commission
-from backend.apps.policies.models import Policy
-from backend.apps.products.models import Product
+from apps.advisers.models import Adviser
+from apps.commission.models import Commission
+from apps.policies.models import Policy
+from apps.products.models import Product
 
 User = get_user_model()
 

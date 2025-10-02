@@ -3,9 +3,9 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
 
-from backend.apps.policies.models import Policy
-from backend.apps.advisers.models import Adviser
-from backend.apps.products.models import Product
+from apps.policies.models import Policy
+from apps.advisers.models import Adviser
+from apps.products.models import Product
 
 
 class Commission(models.Model):

@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from backend.apps.core.models import Client, Adviser
+from apps.core.models import Client, Adviser
 
 class Lender(models.Model):
     """Represents a mortgage provider."""

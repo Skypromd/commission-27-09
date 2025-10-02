@@ -8,8 +8,8 @@ from django.utils import timezone
 from datetime import timedelta
 from rest_framework.decorators import action
 
-from backend.apps.core.models import Client
-from backend.apps.core.serializers import ClientComplianceSerializer
+from apps.core.models import Client
+from apps.core.serializers import ClientComplianceSerializer
 from .models import (
     Commission, Policy, Insurer, Retention, Clawback, Bonus, Override, ReferralFee, InsuranceIngestionTask, InsuranceType
 )
@@ -18,11 +18,11 @@ from .serializers import (
     RetentionSerializer, ClawbackSerializer, BonusSerializer, OverrideSerializer, ReferralFeeSerializer,
     InsuranceCommissionDataIngestionSerializer, InsuranceIngestionTaskSerializer, InsuranceTypeSerializer
 )
-from backend.apps.core.permissions import IsAdminOrReadOnly, IsOwnerOrManager, HasReportAccess
+from apps.core.permissions import IsAdminOrReadOnly, IsOwnerOrManager, HasReportAccess
 from .filters import PolicyFilter
 from .tasks import process_insurance_commission_ingestion
-from backend.apps.core.views import BaseModifierViewSet, BaseRelatedObjectViewSet, BaseDashboardViewSet, BaseReportingViewSet, BaseDataIngestionViewSet
-from backend.apps.core.mixins import HierarchicalQuerySetMixin, AdviserObjectOwnerMixin
+from apps.core.views import BaseModifierViewSet, BaseRelatedObjectViewSet, BaseDashboardViewSet, BaseReportingViewSet, BaseDataIngestionViewSet
+from apps.core.mixins import HierarchicalQuerySetMixin, AdviserObjectOwnerMixin
 
 
 class ReportingViewSet(HierarchicalQuerySetMixin, BaseReportingViewSet):

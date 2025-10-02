@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from .models import Commission, CommissionModifier, Retention, Clawback, Bonus, Override, ReferralFee, CommissionSplit, Advance, Repayment, VestingSchedule, ScheduledPayout
-from backend.apps.advisers.serializers import AdviserSerializer
-from backend.apps.products.serializers import ProductSerializer
-from backend.apps.policies.serializers import PolicySerializer
+from apps.advisers.serializers import AdviserSerializer
+from apps.products.serializers import ProductSerializer
+from apps.policies.serializers import PolicySerializer
 
 
 class CommissionModifierSerializer(serializers.ModelSerializer):

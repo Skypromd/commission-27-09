@@ -1,5 +1,5 @@
 from django.db import models
-from backend.apps.advisers.models import Adviser
+from apps.advisers.models import Adviser
 
 class Policy(models.Model):
     """Модель для хранения информации о страховых полисах."""

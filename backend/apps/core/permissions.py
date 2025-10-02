@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from backend.apps.advisers.models import Adviser
+from apps.advisers.models import Adviser
 
 
 class IsOwnerOrManager(permissions.BasePermission):

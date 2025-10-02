@@ -100,10 +100,10 @@ from rest_framework.test import APIClient
 from decimal import Decimal
 
 # Импортируем модели
-from backend.apps.users.models import CustomUser
-from backend.apps.deals.models import Deal
-from backend.apps.clients.models import Client
-from backend.apps.products.models import Product
+from apps.users.models import CustomUser
+from apps.deals.models import Deal
+from apps.clients.models import Client
+from apps.products.models import Product
 from ..models import Commission, Clawback
 from ..rules_engine import calculate_commission_amount
 

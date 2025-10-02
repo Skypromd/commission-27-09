@@ -2,7 +2,7 @@ from django.db import models
 from decimal import Decimal
 from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
-from backend.apps.core.models import Client, Adviser
+from apps.core.models import Client, Adviser
 from django.conf import settings
 
 class Insurer(models.Model):

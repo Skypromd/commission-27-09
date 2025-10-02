@@ -13,7 +13,7 @@ from .models import (
 )
 from django.utils import timezone
 # Импортируем общие сериализаторы из core
-from backend.apps.core.serializers import ClientSerializer, AdviserSerializer
+from apps.core.serializers import ClientSerializer, AdviserSerializer
 
 
 class InsurerSerializer(serializers.ModelSerializer):

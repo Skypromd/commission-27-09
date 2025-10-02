@@ -2,7 +2,7 @@ from rest_framework import viewsets, permissions
 from django.db.models import Q
 from .models import Policy
 from .serializers import PolicySerializer
-from backend.apps.core.permissions import IsOwnerOrManager
+from apps.core.permissions import IsOwnerOrManager
 
 class PolicyViewSet(viewsets.ReadOnlyModelViewSet):
     """

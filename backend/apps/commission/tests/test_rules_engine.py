@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from django.test import TestCase
 
-from backend.apps.commission.models import (
+from apps.commission.models import (
     Client,
     CustomUser,
     Deal,
@@ -98,10 +98,10 @@ from django.test import TestCase
 from decimal import Decimal
 
 # Импортируем модели из их новых приложений
-from backend.apps.users.models import CustomUser
-from backend.apps.deals.models import Deal
-from backend.apps.clients.models import Client
-from backend.apps.products.models import Product, ProductCategory
+from apps.users.models import CustomUser
+from apps.deals.models import Deal
+from apps.clients.models import Client
+from apps.products.models import Product, ProductCategory
 
 from ..models import CommissionBonus
 from ..rules_engine import calculate_commission_amount

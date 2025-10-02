@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from backend.apps.advisers.models import Adviser
+from apps.advisers.models import Adviser
 
 class Client(models.Model):
     """

@@ -3,10 +3,10 @@ from decimal import Decimal
 from unittest import mock
 
 # Импортируем модели
-from backend.apps.users.models import CustomUser
-from backend.apps.deals.models import Deal
-from backend.apps.clients.models import Client
-from backend.apps.products.models import Product
+from apps.users.models import CustomUser
+from apps.deals.models import Deal
+from apps.clients.models import Client
+from apps.products.models import Product
 from ..models import Commission
 
 # Импортируем задачу
