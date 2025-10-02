@@ -5,5 +5,7 @@ from .models import Report
 
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):
-// ...existing code...
+    list_display = ('name', 'created_at', 'report_type')
+    list_filter = ('report_type', 'created_at')
+    search_fields = ('name',)
 
