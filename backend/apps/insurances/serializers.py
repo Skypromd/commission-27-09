@@ -14,6 +14,8 @@ from .models import (
 from django.utils import timezone
 # Импортируем общие сериализаторы из core
 from apps.core.serializers import ClientSerializer, AdviserSerializer
+# Импортируем модели для связей
+from apps.core.models import Client, Adviser
 
 
 class InsurerSerializer(serializers.ModelSerializer):
