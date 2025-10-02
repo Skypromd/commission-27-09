@@ -47,10 +47,8 @@ function App() {
     setLoginLoading(true);
     
     try {
-      // Имитация API входа (в реальном проекте здесь будет настоящий API)
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Имитация задержки
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Простая проверка демо-данных
       if (credentials.username === 'admin' && credentials.password === 'admin') {
         const userData = {
           id: 1,
@@ -59,13 +57,19 @@ function App() {
           lastName: 'Administrator',
           email: 'admin@commissiontracker.com',
           role: 'Administrator',
-          avatar: '👤'
+          avatar: '👤',
+          twoFactorEnabled: true
         };
+        
+        // Если включена 2FA, переходим к верификации
+        if (userData.twoFactorEnabled) {
+          setPendingUser(userData);
+          setAuthMode('2fa');
+          return { success: true, requiresTwoFactor: true };
+        }
         
         setUser(userData);
         setIsAuthenticated(true);
-        
-        // Сохраняем в localStorage
         localStorage.setItem('commissionTracker_auth', 'true');
         localStorage.setItem('commissionTracker_user', JSON.stringify(userData));
         
@@ -75,6 +79,63 @@ function App() {
       }
     } catch (error) {
       return { success: false, error: 'Connection error' };
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  const handleRegister = async (userData) => {
+    setLoginLoading(true);
+    
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Имитация успешной регистрации
+      const newUser = {
+        id: Date.now(),
+        username: userData.username,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        role: 'User',
+        avatar: '👤',
+        twoFactorEnabled: true
+      };
+      
+      // После регистрации требуется 2FA
+      setPendingUser(newUser);
+      setAuthMode('2fa');
+      
+      return { success: true, message: 'Registration successful! Please verify your 2FA code.' };
+    } catch (error) {
+      return { success: false, error: 'Registration failed' };
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  const handleTwoFactorVerification = async (code) => {
+    setLoginLoading(true);
+    
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Простая проверка 2FA кода (в реальности это будет проверка TOTP)
+      if (code === '123456') {
+        setUser(pendingUser);
+        setIsAuthenticated(true);
+        setPendingUser(null);
+        setTwoFactorCode('');
+        
+        localStorage.setItem('commissionTracker_auth', 'true');
+        localStorage.setItem('commissionTracker_user', JSON.stringify(pendingUser));
+        
+        return { success: true };
+      } else {
+        return { success: false, error: 'Invalid 2FA code' };
+      }
+    } catch (error) {
+      return { success: false, error: 'Verification failed' };
     } finally {
       setLoginLoading(false);
     }
