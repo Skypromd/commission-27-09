@@ -7,15 +7,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    host: true,
-    allowedHosts: [
-      'rushelp.preview.emergentagent.com',
-      '.preview.emergentagent.com',
-      'localhost',
-      '127.0.0.1'
-    ],
+    host: '0.0.0.0',
     // Разрешаем все хосты для Preview URLs
-    disableHostCheck: true
+    allowedHosts: 'all'
   },
   build: {
     outDir: 'dist',
