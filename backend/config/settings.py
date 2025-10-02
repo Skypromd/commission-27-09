@@ -14,8 +14,8 @@ env = environ.Env(
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Take environment variables from .env file
-# Ищем .env файл в родительской директории (в корне проекта)
-environ.Env.read_env(BASE_DIR.parent / '.env')
+# Ищем .env файл в директории backend
+environ.Env.read_env(BASE_DIR / '.env')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
