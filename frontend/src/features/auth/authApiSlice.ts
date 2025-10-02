@@ -3,18 +3,16 @@ import { logOut, setCredentials, User } from './authSlice';
 
 export const authApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation<{ auth_token: string }, any>({
+    login: builder.mutation<{ token: string; user: any }, any>({
       query: (credentials) => ({
-        url: 'auth/token/login/', // URL для входа в djoser
+        url: 'users/auth/login/', // URL для входа в custom backend
         method: 'POST',
         body: credentials,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          dispatch(setCredentials({ token: data.auth_token }));
-          // После успешного входа, запрашиваем данные пользователя
-          dispatch(authApiSlice.endpoints.getMe.initiate());
+          dispatch(setCredentials({ token: data.token, user: data.user }));
         } catch (error) {
           // Обработка ошибок, если нужно
         }
