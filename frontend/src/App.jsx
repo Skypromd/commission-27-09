@@ -5,6 +5,7 @@ function App() {
   const [apiStatus, setApiStatus] = useState('checking');
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [selectedModule, setSelectedModule] = useState(null);
   
   // Определяем backend URL
   const API_BASE = window.location.hostname.includes('preview.emergentagent.com') 
@@ -39,13 +40,12 @@ function App() {
   const loadDashboardData = async () => {
     setLoading(true);
     try {
-      // Загружаем данные из всех модулей
-      const [dealsRes, policiesRes, commissionsRes, usersRes, clientsRes] = await Promise.all([
+      // Загружаем данные из модернизированных API
+      const [dealsRes, advisersRes, clientsRes, productsRes] = await Promise.all([
         fetch(`${API_BASE}/deals/deals/`).catch(() => null),
-        fetch(`${API_BASE}/policies/policies/`).catch(() => null),
-        fetch(`${API_BASE}/commission/commissions/`).catch(() => null),
-        fetch(`${API_BASE}/users/users/`).catch(() => null),
+        fetch(`${API_BASE}/advisers/advisers/`).catch(() => null),
         fetch(`${API_BASE}/clients/clients/`).catch(() => null),
+        fetch(`${API_BASE}/products/products/`).catch(() => null),
       ]);
 
       const newData = {};
@@ -53,17 +53,14 @@ function App() {
       if (dealsRes && dealsRes.ok) {
         newData.deals = await dealsRes.json();
       }
-      if (policiesRes && policiesRes.ok) {
-        newData.policies = await policiesRes.json();
-      }
-      if (commissionsRes && commissionsRes.ok) {
-        newData.commissions = await commissionsRes.json();
-      }
-      if (usersRes && usersRes.ok) {
-        newData.users = await usersRes.json();
+      if (advisersRes && advisersRes.ok) {
+        newData.advisers = await advisersRes.json();
       }
       if (clientsRes && clientsRes.ok) {
         newData.clients = await clientsRes.json();
+      }
+      if (productsRes && productsRes.ok) {
+        newData.products = await productsRes.json();
       }
 
       setData(newData);
@@ -76,11 +73,13 @@ function App() {
 
   const loadModuleData = async (module) => {
     setLoading(true);
+    setSelectedModule(module);
     try {
       const response = await fetch(`${API_BASE}/${module}/${module}/`);
       if (response.ok) {
         const moduleData = await response.json();
         setData(prev => ({ ...prev, [module]: moduleData }));
+        setCurrentView(module);
       }
     } catch (error) {
       console.log(`Error loading ${module} data:`, error);
