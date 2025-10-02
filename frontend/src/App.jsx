@@ -3,15 +3,17 @@ import React, { useState, useEffect } from 'react';
 function App() {
   const [currentView, setCurrentView] = useState('dashboard');
   const [apiStatus, setApiStatus] = useState('checking');
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
   
-  // Определяем backend URL (для статической сборки нужно использовать относительный путь к порту 8080)
+  // Определяем backend URL
   const API_BASE = window.location.hostname.includes('preview.emergentagent.com') 
     ? `https://${window.location.hostname.replace('3001', '8080')}/api`
     : 'http://localhost:8080/api';
 
   useEffect(() => {
-    // Проверяем соединение с backend
     checkApiConnection();
+    loadDashboardData();
   }, []);
 
   const checkApiConnection = async () => {
@@ -22,7 +24,7 @@ function App() {
       });
       
       if (response.status === 403 || response.status === 401) {
-        setApiStatus('connected'); // API отвечает, просто требует аутентификации
+        setApiStatus('connected');
       } else if (response.ok) {
         setApiStatus('connected');
       } else {
@@ -31,6 +33,59 @@ function App() {
     } catch (error) {
       console.log('API connection error:', error);
       setApiStatus('error');
+    }
+  };
+
+  const loadDashboardData = async () => {
+    setLoading(true);
+    try {
+      // Загружаем данные из всех модулей
+      const [dealsRes, policiesRes, commissionsRes, usersRes, clientsRes] = await Promise.all([
+        fetch(`${API_BASE}/deals/deals/`).catch(() => null),
+        fetch(`${API_BASE}/policies/policies/`).catch(() => null),
+        fetch(`${API_BASE}/commission/commissions/`).catch(() => null),
+        fetch(`${API_BASE}/users/users/`).catch(() => null),
+        fetch(`${API_BASE}/clients/clients/`).catch(() => null),
+      ]);
+
+      const newData = {};
+      
+      if (dealsRes && dealsRes.ok) {
+        newData.deals = await dealsRes.json();
+      }
+      if (policiesRes && policiesRes.ok) {
+        newData.policies = await policiesRes.json();
+      }
+      if (commissionsRes && commissionsRes.ok) {
+        newData.commissions = await commissionsRes.json();
+      }
+      if (usersRes && usersRes.ok) {
+        newData.users = await usersRes.json();
+      }
+      if (clientsRes && clientsRes.ok) {
+        newData.clients = await clientsRes.json();
+      }
+
+      setData(newData);
+    } catch (error) {
+      console.log('Error loading dashboard data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadModuleData = async (module) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_BASE}/${module}/${module}/`);
+      if (response.ok) {
+        const moduleData = await response.json();
+        setData(prev => ({ ...prev, [module]: moduleData }));
+      }
+    } catch (error) {
+      console.log(`Error loading ${module} data:`, error);
+    } finally {
+      setLoading(false);
     }
   };
 
