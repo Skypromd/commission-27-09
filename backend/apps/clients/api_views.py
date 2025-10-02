@@ -26,7 +26,7 @@ class ClientViewSet(viewsets.ModelViewSet):
     """
     queryset = Client.objects.select_related('agent').all()
     serializer_class = ClientSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrManager]
+    permission_classes = [permissions.AllowAny]  # Временно для демо
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['name', 'email', 'phone']
     ordering_fields = ['name', 'created_at', 'agent__user__last_name']
