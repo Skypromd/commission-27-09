@@ -13,6 +13,11 @@ from apps.core.serializers import ClientComplianceSerializer
 from .models import (
     Commission, Policy, Insurer, Retention, Clawback, Bonus, Override, ReferralFee, InsuranceIngestionTask, InsuranceType
 )
+
+# Базовый класс для отчетов
+class BaseReportingViewSet(viewsets.ReadOnlyModelViewSet):
+    """Базовый ViewSet для создания отчетов"""
+    pass
 from .serializers import (
     PolicyListSerializer, PolicyDetailSerializer, PolicyWriteSerializer, InsurerSerializer, CommissionSerializer,
     RetentionSerializer, ClawbackSerializer, BonusSerializer, OverrideSerializer, ReferralFeeSerializer,
