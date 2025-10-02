@@ -1141,31 +1141,7 @@ function App() {
 
   return (
     <div className="commission-tracker min-h-screen bg-gray-50">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-gray-900">
-                Commission Tracker
-              </h1>
-              <span className="ml-3 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
-                v2.2.0
-              </span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="text-sm text-gray-500">
-                Welcome, Admin
-              </div>
-              <button
-                onClick={() => window.open(`${API_BASE.replace('/api', '/admin/')}`, '_blank')}
-                className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-md"
-              >
-                Admin Panel
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Modern Header integrated into Dashboard */}
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
