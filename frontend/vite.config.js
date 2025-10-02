@@ -19,7 +19,14 @@ export default defineConfig({
     hmr: {
       port: 3000
     },
-    cors: true
+    cors: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false
+      }
+    }
   },
   // Для Vite 5+ отключаем проверку хостов через preview
   preview: {
