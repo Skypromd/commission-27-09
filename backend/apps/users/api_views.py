@@ -1,8 +1,11 @@
 from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import make_password
 from .models import User
-from .serializers import UserSerializer, UserProfileSerializer
+from .serializers import UserSerializer, UserProfileSerializer, UserRegistrationSerializer, UserLoginSerializer
 from .permissions import IsAdminOrOwnerOrManagerReadOnly
 from .services import get_all_subordinates
 
