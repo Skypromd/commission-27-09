@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Registration from './components/Registration';
-import TwoFactorAuth from './components/TwoFactorAuth';
+import Registration from './components/Registration.jsx';
+import TwoFactorAuth from './components/TwoFactorAuth.jsx';
 
 function App() {
   const [currentView, setCurrentView] = useState('dashboard');
