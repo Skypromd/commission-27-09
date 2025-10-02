@@ -587,10 +587,10 @@ function App() {
                 key={module.name} 
                 onClick={() => {
                   console.log('Module clicked:', module.key);
-                  if (['deals', 'advisers', 'clients', 'products'].includes(module.key)) {
+                  if (['deals', 'advisers', 'clients', 'products', 'insurances', 'mortgages'].includes(module.key)) {
                     loadModuleData(module.key);
                   } else {
-                    alert(`${module.name} модуль в разработке. Доступны: Deals, Advisers, Clients, Products`);
+                    alert(`${module.name} модуль в разработке. Доступны: Deals, Advisers, Clients, Products, Insurances, Mortgage`);
                   }
                 }}
                 className={`text-center p-4 border border-gray-200 rounded-lg transition-all cursor-pointer ${module.color} ${loading && selectedModule === module.key ? 'animate-pulse' : ''}`}
