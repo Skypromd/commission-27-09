@@ -1,10 +1,13 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ProductCategoryViewSet, ProductViewSet
+from .api_views import ProductViewSet, ProductCategoryViewSet
+from .views import ProductViewSet as OldProductViewSet
 
 router = DefaultRouter()
-router.register(r'categories', ProductCategoryViewSet, basename='product-category')
-router.register(r'', ProductViewSet, basename='product') # Теперь /api/products/ будет вести на список продуктов
+router.register(r'products', ProductViewSet)
+router.register(r'categories', ProductCategoryViewSet)
+# Keep old viewset for compatibility
+router.register(r'products-old', OldProductViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
