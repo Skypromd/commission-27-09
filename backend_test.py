@@ -202,7 +202,7 @@ class AuthenticationTester:
         
         # Test 1: Login with newly registered user
         login_data = {
-            "username": "testuser123",
+            "username": f"testuser{timestamp}",
             "password": "SecurePassword123!"
         }
         
