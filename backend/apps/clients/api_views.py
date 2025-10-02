@@ -9,7 +9,7 @@ from django.utils import timezone
 
 from .models import Client
 from .serializers import ClientSerializer
-from apps.core.permissions import IsOwnerOrManager
+# from apps.core.permissions import IsOwnerOrManager  # Временно отключено
 
 
 @extend_schema_view(
